@@ -1,0 +1,3725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Earnr AI — Find Your Best Way to Make Money (v4)</title>
+  <meta name="description" content="Earnr AI turns your real skills, interests, and free time into a personalized money plan with an Opportunity Score and step-by-step roadmap — in under 60 seconds." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+/* ═══════════════════════════════════════════
+   DESIGN TOKENS
+═══════════════════════════════════════════ */
+:root {
+  --green-50:  #f0fdf4;
+  --green-100: #dcfce7;
+  --green-200: #bbf7d0;
+  --green-300: #86efac;
+  --green-400: #4ade80;
+  --green-500: #22c55e;
+  --green-600: #16a34a;
+  --green-700: #15803d;
+  --green-800: #166534;
+  --green-900: #14532d;
+
+  --slate-50:  #f8fafc;
+  --slate-100: #f1f5f9;
+  --slate-200: #e2e8f0;
+  --slate-300: #cbd5e1;
+  --slate-400: #94a3b8;
+  --slate-500: #64748b;
+  --slate-600: #475569;
+  --slate-700: #334155;
+  --slate-800: #1e293b;
+  --slate-900: #0f172a;
+  --slate-950: #020617;
+
+  --white: #ffffff;
+  --black: #000000;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-2xl: 32px;
+  --radius-full: 9999px;
+
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.05);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,.07), 0 2px 4px -1px rgba(0,0,0,.04);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,.08), 0 4px 6px -2px rgba(0,0,0,.04);
+  --shadow-xl: 0 20px 25px -5px rgba(0,0,0,.08), 0 10px 10px -5px rgba(0,0,0,.03);
+  --shadow-2xl: 0 25px 50px -12px rgba(0,0,0,.15);
+  --shadow-green: 0 0 0 3px rgba(34,197,94,.2);
+
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --transition: 200ms cubic-bezier(.4,0,.2,1);
+  --transition-slow: 400ms cubic-bezier(.4,0,.2,1);
+}
+
+/* ═══════════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--font);
+  background: var(--white);
+  color: var(--slate-900);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+img, svg { display: block; max-width: 100%; }
+button { cursor: pointer; font-family: inherit; border: none; background: none; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+
+/* ═══════════════════════════════════════════
+   LAYOUT UTILITIES
+═══════════════════════════════════════════ */
+.container {
+  width: 100%;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.container--narrow { max-width: 760px; }
+.container--wide   { max-width: 1280px; }
+
+section { padding: 96px 0; }
+
+/* ═══════════════════════════════════════════
+   TYPOGRAPHY
+═══════════════════════════════════════════ */
+.display {
+  font-size: clamp(2.8rem, 6vw, 4.5rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -.03em;
+  color: var(--slate-900);
+}
+.headline {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -.025em;
+  color: var(--slate-900);
+}
+.subheadline {
+  font-size: clamp(1.1rem, 2vw, 1.25rem);
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--slate-600);
+}
+.label {
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--green-600);
+}
+.gradient-text {
+  background: linear-gradient(135deg, var(--green-600) 0%, var(--green-500) 50%, #10b981 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ═══════════════════════════════════════════
+   BUTTONS
+═══════════════════════════════════════════ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font);
+  font-weight: 600;
+  font-size: .9375rem;
+  border-radius: var(--radius-full);
+  padding: 14px 28px;
+  transition: all var(--transition);
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+}
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0);
+  transition: background var(--transition);
+}
+.btn:hover::after { background: rgba(255,255,255,.1); }
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--green-600), var(--green-500));
+  color: var(--white);
+  box-shadow: 0 1px 2px rgba(0,0,0,.1), 0 4px 16px rgba(22,163,74,.25);
+}
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 1px 2px rgba(0,0,0,.1), 0 8px 24px rgba(22,163,74,.35);
+}
+.btn-primary:active { transform: translateY(0); }
+
+.btn-secondary {
+  background: var(--white);
+  color: var(--slate-700);
+  border: 1.5px solid var(--slate-200);
+  box-shadow: var(--shadow-sm);
+}
+.btn-secondary:hover {
+  border-color: var(--slate-300);
+  background: var(--slate-50);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--green-700);
+  padding: 10px 16px;
+}
+.btn-ghost:hover { background: var(--green-50); }
+
+.btn--lg { font-size: 1.0625rem; padding: 16px 36px; }
+.btn--sm { font-size: .875rem; padding: 10px 20px; }
+
+.btn svg { flex-shrink: 0; transition: transform var(--transition); }
+.btn:hover svg.arrow { transform: translateX(3px); }
+
+/* Magnetic button wrapper */
+.magnetic-wrap { display: inline-block; transition: transform .15s ease; }
+
+/* ═══════════════════════════════════════════
+   BADGE / PILL
+═══════════════════════════════════════════ */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: .8125rem;
+  font-weight: 600;
+  letter-spacing: .01em;
+}
+.badge-green {
+  background: var(--green-50);
+  color: var(--green-700);
+  border: 1px solid var(--green-200);
+}
+.badge-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--green-500);
+  box-shadow: 0 0 0 3px rgba(34,197,94,.2);
+  animation: pulse-dot 2s infinite;
+}
+@keyframes pulse-dot {
+  0%,100% { box-shadow: 0 0 0 3px rgba(34,197,94,.2); }
+  50%      { box-shadow: 0 0 0 6px rgba(34,197,94,.08); }
+}
+
+/* ═══════════════════════════════════════════
+   SCROLL PROGRESS BAR
+═══════════════════════════════════════════ */
+#scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  background: linear-gradient(to right, var(--green-700), var(--green-500), #10b981);
+  z-index: 9999;
+  width: 0%;
+  box-shadow: 0 0 10px rgba(34,197,94,.6);
+  pointer-events: none;
+}
+
+/* ═══════════════════════════════════════════
+   CUSTOM CURSOR GLOW
+═══════════════════════════════════════════ */
+#cursor-glow {
+  position: fixed;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: rgba(34,197,94,.18);
+  border: 1.5px solid rgba(34,197,94,.4);
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: multiply;
+  transition: width .2s ease, height .2s ease, background .2s ease, border-color .2s ease;
+  opacity: 0;
+}
+#cursor-glow.show { opacity: 1; }
+#cursor-glow.hovering {
+  width: 48px; height: 48px;
+  background: rgba(34,197,94,.08);
+  border-color: rgba(34,197,94,.22);
+}
+@media (hover: none) { #cursor-glow { display: none !important; } }
+
+/* ═══════════════════════════════════════════
+   NAV
+═══════════════════════════════════════════ */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 0 24px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  background: rgba(255,255,255,.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(0,0,0,.06);
+  transition: box-shadow var(--transition);
+}
+.nav.scrolled { box-shadow: var(--shadow-md); }
+.nav-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: -.025em;
+  color: var(--slate-900);
+}
+.nav-logo-icon {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--green-600), var(--green-500));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.nav-links a {
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  font-size: .9rem;
+  font-weight: 500;
+  color: var(--slate-600);
+  transition: all var(--transition);
+}
+.nav-links a:hover { color: var(--slate-900); background: var(--slate-100); }
+.nav-actions { display: flex; align-items: center; gap: 8px; }
+.nav-mobile-btn {
+  display: none;
+  width: 40px; height: 40px;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  cursor: pointer;
+  border: none;
+}
+.nav-mobile-btn span {
+  display: block;
+  width: 20px; height: 1.5px;
+  background: var(--slate-700);
+  margin: 4px 0;
+  transition: all var(--transition);
+}
+
+/* ═══════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════ */
+.hero {
+  padding: 140px 0 80px;
+  background: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+#hero-canvas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+/* Dot pattern highlight that follows mouse */
+.hero-dot-pattern {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: radial-gradient(circle, rgba(34,197,94,.13) 1px, transparent 1px);
+  background-size: 18px 18px;
+  opacity: .45;
+}
+.hero-dot-highlight {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: radial-gradient(circle, rgba(34,197,94,.45) 1px, transparent 1px);
+  background-size: 18px 18px;
+  opacity: 0;
+  transition: opacity .3s;
+  -webkit-mask-image: radial-gradient(220px circle at 50% 50%, black 0%, transparent 100%);
+  mask-image: radial-gradient(220px circle at 50% 50%, black 0%, transparent 100%);
+}
+.hero:hover .hero-dot-highlight { opacity: 1; }
+.hero-bg-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+.hero-bg-blob-1 {
+  width: 600px; height: 400px;
+  background: radial-gradient(ellipse, rgba(34,197,94,.12) 0%, transparent 70%);
+  top: -100px; right: -100px;
+}
+.hero-bg-blob-2 {
+  width: 400px; height: 300px;
+  background: radial-gradient(ellipse, rgba(16,185,129,.08) 0%, transparent 70%);
+  bottom: 0; left: 10%;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+.hero-content { max-width: 560px; }
+.hero-badge { margin-bottom: 24px; }
+.hero-headline {
+  font-size: clamp(2.6rem, 5.5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.06;
+  letter-spacing: -.035em;
+  color: var(--slate-900);
+  margin-bottom: 20px;
+}
+/* Typewriter cursor */
+.tw-cursor {
+  display: inline-block;
+  width: 3px;
+  height: 1em;
+  background: var(--green-500);
+  margin-left: 2px;
+  animation: twBlink .6s step-end infinite;
+  vertical-align: text-bottom;
+}
+@keyframes twBlink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+.hero-sub {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: var(--slate-600);
+  margin-bottom: 36px;
+  max-width: 480px;
+}
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+.hero-proof {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.hero-proof-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .875rem;
+  font-weight: 500;
+  color: var(--slate-600);
+}
+.hero-proof-icon {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--green-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--green-600);
+  flex-shrink: 0;
+}
+.hero-divider {
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--slate-300);
+}
+
+/* ── PHONE MOCKUP ── */
+.hero-visual {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  position: relative;
+}
+.phone-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: -20px;
+}
+.phone {
+  width: 260px;
+  border-radius: 36px;
+  background: var(--slate-900);
+  padding: 10px;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.08),
+    0 32px 80px rgba(0,0,0,.3),
+    0 8px 20px rgba(0,0,0,.2),
+    inset 0 1px 0 rgba(255,255,255,.1);
+  flex-shrink: 0;
+  transition: transform var(--transition-slow);
+  position: relative;
+  z-index: 2;
+}
+.phone:hover { transform: translateY(-8px) rotate(-1deg); }
+.phone-screen {
+  border-radius: 28px;
+  overflow: hidden;
+  background: var(--white);
+}
+.phone-notch {
+  width: 100px; height: 28px;
+  background: var(--slate-900);
+  border-radius: 0 0 20px 20px;
+  margin: 0 auto;
+  margin-bottom: -4px;
+  position: relative;
+  z-index: 1;
+}
+
+.phone-secondary {
+  position: absolute;
+  right: -50px;
+  bottom: 40px;
+  width: 220px;
+  transform: scale(.88) rotate(4deg);
+  z-index: 1;
+  opacity: .85;
+}
+.phone-secondary:hover { transform: scale(.9) rotate(3deg) translateY(-6px); opacity: 1; }
+
+/* App Screen Designs */
+.app-screen {
+  width: 100%;
+  background: var(--white);
+  font-family: var(--font);
+}
+.screen-score {
+  padding: 20px 16px 24px;
+  min-height: 480px;
+  display: flex;
+  flex-direction: column;
+}
+.screen-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.screen-logo {
+  font-size: .875rem;
+  font-weight: 800;
+  color: var(--green-600);
+  letter-spacing: -.02em;
+}
+.screen-step {
+  font-size: .7rem;
+  font-weight: 600;
+  color: var(--slate-400);
+  background: var(--slate-100);
+  padding: 4px 8px;
+  border-radius: 999px;
+}
+.score-title {
+  font-size: .95rem;
+  font-weight: 700;
+  color: var(--slate-800);
+  text-align: center;
+  margin-bottom: 4px;
+}
+.score-sub {
+  font-size: .7rem;
+  color: var(--slate-500);
+  text-align: center;
+  margin-bottom: 18px;
+}
+.score-ring-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 18px;
+}
+.score-ring {
+  position: relative;
+  width: 120px;
+  height: 120px;
+}
+.score-ring svg {
+  transform: rotate(-90deg);
+  width: 120px;
+  height: 120px;
+}
+.score-ring-bg { fill: none; stroke: var(--green-100); stroke-width: 8; }
+.score-ring-fill {
+  fill: none;
+  stroke: url(#scoreGradient);
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-dasharray: 339;
+  stroke-dashoffset: 75;
+  transition: stroke-dashoffset 1.5s cubic-bezier(.34,1.56,.64,1);
+}
+.score-number {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.score-big {
+  font-size: 1.875rem;
+  font-weight: 900;
+  color: var(--slate-900);
+  line-height: 1;
+  letter-spacing: -.04em;
+}
+.score-label {
+  font-size: .6rem;
+  font-weight: 700;
+  color: var(--green-600);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.score-badges {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+.score-badge {
+  font-size: .65rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: var(--green-50);
+  color: var(--green-700);
+  border: 1px solid var(--green-200);
+}
+.screen-ideas {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-top: 14px;
+}
+.screen-idea-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: var(--slate-50);
+  border: 1px solid var(--slate-100);
+}
+.idea-icon {
+  width: 28px; height: 28px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .875rem;
+  flex-shrink: 0;
+}
+.idea-icon-1 { background: #fef3c7; }
+.idea-icon-2 { background: #dbeafe; }
+.idea-icon-3 { background: var(--green-100); }
+.idea-text { flex: 1; }
+.idea-name { font-size: .7rem; font-weight: 700; color: var(--slate-800); line-height: 1.2; }
+.idea-time { font-size: .6rem; color: var(--slate-500); margin-top: 1px; }
+.idea-earn {
+  font-size: .65rem;
+  font-weight: 700;
+  color: var(--green-600);
+  text-align: right;
+}
+
+/* Screen 2: Question flow */
+.screen-question {
+  padding: 20px 16px 24px;
+  min-height: 480px;
+  display: flex;
+  flex-direction: column;
+}
+.question-progress {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 24px;
+}
+.progress-dot {
+  flex: 1;
+  height: 3px;
+  border-radius: 999px;
+  background: var(--slate-100);
+}
+.progress-dot.active { background: var(--green-500); }
+.progress-dot.done { background: var(--green-200); }
+.question-emoji {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  text-align: center;
+}
+.question-text {
+  font-size: .95rem;
+  font-weight: 700;
+  color: var(--slate-900);
+  text-align: center;
+  margin-bottom: 6px;
+  line-height: 1.35;
+}
+.question-hint {
+  font-size: .7rem;
+  color: var(--slate-400);
+  text-align: center;
+  margin-bottom: 20px;
+}
+.question-options {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.q-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1.5px solid var(--slate-200);
+  background: var(--white);
+  cursor: pointer;
+  transition: all var(--transition);
+  font-size: .75rem;
+  font-weight: 600;
+  color: var(--slate-700);
+}
+.q-option.selected {
+  border-color: var(--green-400);
+  background: var(--green-50);
+  color: var(--green-800);
+}
+.q-option-icon {
+  font-size: 1rem;
+  width: 28px; height: 28px;
+  border-radius: 7px;
+  background: var(--slate-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.q-option.selected .q-option-icon { background: var(--green-100); }
+.q-check {
+  margin-left: auto;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  border: 1.5px solid var(--slate-300);
+  flex-shrink: 0;
+}
+.q-option.selected .q-check {
+  background: var(--green-500);
+  border-color: var(--green-500);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ═══════════════════════════════════════════
+   TRUST STRIP
+═══════════════════════════════════════════ */
+.trust-strip {
+  padding: 0;
+  border-top: 1px solid var(--slate-100);
+  border-bottom: 1px solid var(--slate-100);
+  background: var(--slate-50);
+}
+.trust-strip-inner {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 28px 32px;
+  border-right: 1px solid var(--slate-200);
+}
+.trust-item:last-child { border-right: none; }
+.trust-icon {
+  width: 40px; height: 40px;
+  border-radius: var(--radius-md);
+  background: var(--green-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--green-600);
+}
+.trust-text strong {
+  display: block;
+  font-size: .9375rem;
+  font-weight: 700;
+  color: var(--slate-900);
+  margin-bottom: 2px;
+}
+.trust-text span {
+  font-size: .825rem;
+  color: var(--slate-500);
+}
+
+/* ═══════════════════════════════════════════
+   HOW IT WORKS
+═══════════════════════════════════════════ */
+.how-section { background: var(--white); }
+.section-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+.section-header .label { margin-bottom: 12px; }
+.section-header .headline { margin-bottom: 16px; }
+.section-header .subheadline { margin: 0 auto; max-width: 520px; }
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  position: relative;
+}
+.steps-grid::before {
+  content: '';
+  position: absolute;
+  top: 32px;
+  left: calc(12.5% + 32px);
+  right: calc(12.5% + 32px);
+  height: 2px;
+  background: linear-gradient(to right, var(--green-200), var(--green-400), var(--green-200));
+  z-index: 0;
+}
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 16px;
+  position: relative;
+  z-index: 1;
+}
+.step-num {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 2px solid var(--green-200);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  position: relative;
+  box-shadow: var(--shadow-sm), 0 0 0 6px var(--white);
+  transition: all var(--transition);
+}
+.step:hover .step-num {
+  background: var(--green-50);
+  border-color: var(--green-400);
+  box-shadow: var(--shadow-md), 0 0 0 6px var(--white);
+  transform: scale(1.05);
+}
+.step-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--slate-900);
+  margin-bottom: 8px;
+}
+.step-desc {
+  font-size: .875rem;
+  color: var(--slate-500);
+  line-height: 1.6;
+}
+
+/* ═══════════════════════════════════════════
+   FEATURES
+═══════════════════════════════════════════ */
+.features-section {
+  background: var(--slate-950);
+  color: var(--white);
+}
+.features-section .headline { color: var(--white); }
+.features-section .subheadline { color: rgba(255,255,255,.55); }
+.features-section .label { color: var(--green-400); }
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(255,255,255,.06);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.06);
+  margin-top: 56px;
+}
+.feature-card {
+  background: var(--slate-950);
+  padding: 36px 32px;
+  position: relative;
+  overflow: hidden;
+  transition: background var(--transition);
+}
+.feature-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(34,197,94,.06) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+.feature-card:hover { background: rgba(255,255,255,.03); }
+.feature-card:hover::before { opacity: 1; }
+.feature-card.featured {
+  grid-column: span 2;
+  background: linear-gradient(135deg, rgba(22,163,74,.15) 0%, rgba(16,185,129,.08) 100%);
+  border: 1px solid rgba(34,197,94,.2);
+  margin: 1px;
+  border-radius: calc(var(--radius-xl) - 1px);
+}
+.feature-icon {
+  width: 48px; height: 48px;
+  border-radius: var(--radius-md);
+  background: rgba(34,197,94,.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  color: var(--green-400);
+  font-size: 1.375rem;
+  transition: all var(--transition);
+}
+.feature-card:hover .feature-icon { background: rgba(34,197,94,.2); transform: scale(1.05); }
+.feature-card-tag {
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--green-400);
+  margin-bottom: 8px;
+}
+.feature-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 10px;
+  letter-spacing: -.015em;
+}
+.feature-desc {
+  font-size: .9rem;
+  color: rgba(255,255,255,.5);
+  line-height: 1.65;
+}
+
+/* 3D Tilt */
+.tilt-card { transform-style: preserve-3d; will-change: transform; }
+.tilt-shine {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .3s;
+}
+.tilt-card:hover .tilt-shine { opacity: 1; }
+
+/* ═══════════════════════════════════════════
+   APP PREVIEW
+═══════════════════════════════════════════ */
+.preview-section { background: var(--green-50); overflow: hidden; }
+.preview-section .label { color: var(--green-700); }
+
+.preview-screens {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  align-items: flex-end;
+  margin-top: 56px;
+  padding: 0 20px 40px;
+}
+.preview-phone {
+  border-radius: 32px;
+  background: var(--slate-900);
+  padding: 10px;
+  box-shadow: 0 32px 80px rgba(0,0,0,.2), 0 8px 20px rgba(0,0,0,.12), 0 0 0 1px rgba(255,255,255,.06);
+  flex-shrink: 0;
+  transition: transform var(--transition-slow);
+}
+.preview-phone:hover { transform: translateY(-12px); }
+.preview-phone-screen { border-radius: 24px; overflow: hidden; }
+.preview-phone:nth-child(1) { transform: rotate(-4deg) translateY(16px); width: 220px; }
+.preview-phone:nth-child(1):hover { transform: rotate(-2deg) translateY(4px); }
+.preview-phone:nth-child(2) { width: 240px; }
+.preview-phone:nth-child(3) { transform: rotate(4deg) translateY(16px); width: 220px; }
+.preview-phone:nth-child(3):hover { transform: rotate(2deg) translateY(4px); }
+
+.mini-screen { font-family: var(--font); }
+
+.mini-onboard {
+  background: linear-gradient(160deg, var(--green-600), var(--green-700));
+  padding: 24px 16px;
+  min-height: 380px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+}
+.mini-onboard-icon {
+  width: 56px; height: 56px;
+  border-radius: 14px;
+  background: rgba(255,255,255,.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin: 0 auto 16px;
+}
+.mini-onboard h3 { font-size: 1rem; font-weight: 800; margin-bottom: 8px; line-height: 1.2; }
+.mini-onboard p { font-size: .72rem; opacity: .75; margin-bottom: 20px; line-height: 1.5; }
+.mini-onboard-btn {
+  background: white;
+  color: var(--green-700);
+  border-radius: 999px;
+  padding: 10px 20px;
+  font-size: .75rem;
+  font-weight: 700;
+  width: 100%;
+}
+.mini-onboard-trust {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 16px;
+}
+.mini-trust-pill {
+  font-size: .6rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.15);
+  color: rgba(255,255,255,.85);
+}
+
+.mini-map {
+  background: var(--white);
+  padding: 16px;
+  min-height: 380px;
+  display: flex;
+  flex-direction: column;
+}
+.mini-map-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.mini-map-title { font-size: .8rem; font-weight: 800; color: var(--slate-900); }
+.mini-map-badge { font-size: .6rem; font-weight: 700; padding: 2px 7px; border-radius: 999px; background: var(--green-100); color: var(--green-700); }
+.mini-map-item {
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  border: 1px solid var(--slate-100);
+  align-items: flex-start;
+}
+.mini-map-step {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: var(--green-500);
+  color: white;
+  font-size: .55rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.mini-map-step.locked { background: var(--slate-200); color: var(--slate-400); }
+.mini-map-item-text { font-size: .65rem; line-height: 1.4; color: var(--slate-700); font-weight: 600; }
+.mini-map-item-meta { font-size: .58rem; color: var(--slate-400); margin-top: 2px; font-weight: 400; }
+
+/* ═══════════════════════════════════════════
+   WHY DIFFERENT
+═══════════════════════════════════════════ */
+.why-section { background: var(--white); }
+.why-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+  margin-top: 56px;
+}
+.why-col-label {
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: 999px;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+.why-col-label.bad { background: #fee2e2; color: #b91c1c; }
+.why-col-label.good { background: var(--green-100); color: var(--green-700); }
+.why-list { display: flex; flex-direction: column; gap: 12px; }
+.why-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  border-radius: var(--radius-md);
+}
+.why-item.bad { background: #fff5f5; border: 1px solid #fee2e2; }
+.why-item.good { background: var(--green-50); border: 1px solid var(--green-200); }
+.why-item-icon {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .75rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.why-item.bad  .why-item-icon { background: #fee2e2; color: #b91c1c; }
+.why-item.good .why-item-icon { background: var(--green-200); color: var(--green-700); }
+.why-item-text {
+  font-size: .9375rem;
+  color: var(--slate-700);
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+/* ═══════════════════════════════════════════
+   SOCIAL PROOF
+═══════════════════════════════════════════ */
+.proof-section { background: var(--slate-50); }
+.audience-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 56px;
+}
+.audience-card {
+  background: var(--white);
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-lg);
+  padding: 24px 20px;
+  text-align: center;
+  transition: all var(--transition);
+}
+.audience-card:hover {
+  border-color: var(--green-300);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.audience-emoji { font-size: 2rem; margin-bottom: 10px; }
+.audience-label { font-size: .9375rem; font-weight: 700; color: var(--slate-800); margin-bottom: 4px; }
+.audience-desc { font-size: .825rem; color: var(--slate-500); line-height: 1.5; }
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.testimonial {
+  background: var(--white);
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-xl);
+  padding: 28px;
+  position: relative;
+  transition: all var(--transition);
+}
+.testimonial:hover {
+  border-color: var(--green-300);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-3px);
+}
+.testimonial.featured {
+  background: linear-gradient(135deg, var(--green-50), var(--white));
+  border-color: var(--green-300);
+}
+.testimonial-stars {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 16px;
+  color: #f59e0b;
+  font-size: .9rem;
+}
+.testimonial-text {
+  font-size: .9375rem;
+  color: var(--slate-700);
+  line-height: 1.7;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.author-avi {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .875rem;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+}
+.author-avi-1 { background: linear-gradient(135deg, #6366f1, #8b5cf6); }
+.author-avi-2 { background: linear-gradient(135deg, var(--green-500), #10b981); }
+.author-avi-3 { background: linear-gradient(135deg, #f59e0b, #ef4444); }
+.author-name { font-size: .875rem; font-weight: 700; color: var(--slate-900); }
+.author-role { font-size: .775rem; color: var(--slate-500); margin-top: 1px; }
+.testimonial-badge {
+  position: absolute;
+  top: 20px; right: 20px;
+  font-size: .65rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: var(--green-100);
+  color: var(--green-700);
+}
+
+/* ═══════════════════════════════════════════
+   INTERACTIVE QUIZ SECTION
+═══════════════════════════════════════════ */
+.quiz-section {
+  background: linear-gradient(160deg, var(--slate-950) 0%, #080e1c 100%);
+  position: relative;
+  overflow: hidden;
+}
+.quiz-section::before {
+  content: '';
+  position: absolute;
+  width: 700px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(34,197,94,.08) 0%, transparent 70%);
+  top: -150px; right: -100px;
+  pointer-events: none;
+}
+.quiz-section .headline { color: var(--white); }
+.quiz-section .subheadline { color: rgba(255,255,255,.45); }
+.quiz-section .label { color: var(--green-400); }
+
+.quiz-container {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 48px;
+  align-items: start;
+  margin-top: 56px;
+}
+.quiz-panel {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: var(--radius-xl);
+  padding: 36px;
+}
+.quiz-panel-title {
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.3);
+  margin-bottom: 16px;
+}
+.quiz-skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+.skill-pill {
+  padding: 8px 14px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid rgba(255,255,255,.1);
+  background: rgba(255,255,255,.04);
+  color: rgba(255,255,255,.55);
+  font-size: .8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition);
+  user-select: none;
+}
+.skill-pill:hover { border-color: rgba(34,197,94,.4); color: rgba(255,255,255,.9); background: rgba(34,197,94,.07); }
+.skill-pill.selected { border-color: var(--green-500); background: rgba(34,197,94,.14); color: var(--green-300); }
+
+.quiz-row-label {
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.28);
+  margin-bottom: 12px;
+}
+.time-options {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+.time-opt {
+  padding: 9px 18px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid rgba(255,255,255,.09);
+  background: rgba(255,255,255,.04);
+  color: rgba(255,255,255,.5);
+  font-size: .8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition);
+  user-select: none;
+}
+.time-opt:hover { border-color: rgba(34,197,94,.35); color: rgba(255,255,255,.8); }
+.time-opt.selected { border-color: var(--green-500); background: rgba(34,197,94,.14); color: var(--green-300); }
+
+.quiz-result-panel {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: var(--radius-xl);
+  padding: 36px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: sticky;
+  top: 88px;
+}
+.quiz-score-ring {
+  position: relative;
+  width: 160px; height: 160px;
+  margin-bottom: 20px;
+}
+.quiz-score-ring svg { width: 160px; height: 160px; transform: rotate(-90deg); }
+.qring-bg { fill: none; stroke: rgba(255,255,255,.06); stroke-width: 10; }
+.qring-fill {
+  fill: none;
+  stroke: url(#qGrad);
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-dasharray: 440;
+  stroke-dashoffset: 440;
+  transition: stroke-dashoffset .9s cubic-bezier(.34,1.56,.64,1);
+}
+.quiz-score-number {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.qscore-big {
+  font-size: 2.75rem;
+  font-weight: 900;
+  color: var(--white);
+  line-height: 1;
+  letter-spacing: -.04em;
+  transition: color .4s;
+}
+.qscore-big.lit { color: var(--green-400); }
+.qscore-sub {
+  font-size: .65rem;
+  font-weight: 700;
+  color: rgba(255,255,255,.35);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.quiz-result-title { font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 6px; text-align: center; }
+.quiz-result-desc { font-size: .8375rem; color: rgba(255,255,255,.4); text-align: center; line-height: 1.6; margin-bottom: 20px; min-height: 52px; }
+.quiz-ideas-list { width: 100%; display: flex; flex-direction: column; gap: 8px; min-height: 100px; margin-bottom: 24px; }
+.qi {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.06);
+  opacity: 0;
+  transform: translateX(10px);
+  transition: opacity .35s ease, transform .35s ease;
+}
+.qi.show { opacity: 1; transform: none; }
+.qi-icon { width: 26px; height: 26px; border-radius: 6px; background: rgba(34,197,94,.15); display: flex; align-items: center; justify-content: center; font-size: .8rem; flex-shrink: 0; }
+.qi-name { font-size: .8rem; font-weight: 600; color: rgba(255,255,255,.75); flex: 1; }
+.qi-earn { font-size: .73rem; font-weight: 700; color: var(--green-400); }
+.quiz-empty { font-size: .8375rem; color: rgba(255,255,255,.2); text-align: center; font-style: italic; padding: 24px 8px; }
+.quiz-cta-btn {
+  width: 100%;
+  background: linear-gradient(135deg, var(--green-600), var(--green-500));
+  color: white;
+  border: none;
+  border-radius: var(--radius-full);
+  padding: 14px;
+  font-size: .9375rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.quiz-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(22,163,74,.4); }
+
+/* ═══════════════════════════════════════════
+   PRICING
+═══════════════════════════════════════════ */
+.pricing-section { background: var(--white); }
+.pricing-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  max-width: 800px;
+  margin: 56px auto 0;
+}
+.pricing-card {
+  border-radius: var(--radius-xl);
+  padding: 36px;
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition);
+}
+.pricing-card:hover { transform: translateY(-4px); }
+.pricing-card.free {
+  background: var(--slate-50);
+  border: 1.5px solid var(--slate-200);
+}
+.pricing-card.premium {
+  background: var(--slate-900);
+  border: 1.5px solid var(--slate-700);
+  box-shadow: var(--shadow-2xl);
+}
+.pricing-card.premium::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(to right, var(--green-600), var(--green-400), #10b981);
+}
+.pricing-badge {
+  display: inline-block;
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-bottom: 20px;
+}
+.pricing-card.free  .pricing-badge { background: var(--slate-200); color: var(--slate-600); }
+.pricing-card.premium .pricing-badge { background: rgba(34,197,94,.15); color: var(--green-400); }
+.pricing-name {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -.025em;
+  margin-bottom: 4px;
+}
+.pricing-card.free .pricing-name { color: var(--slate-900); }
+.pricing-card.premium .pricing-name { color: var(--white); }
+.pricing-price {
+  font-size: 2.5rem;
+  font-weight: 900;
+  letter-spacing: -.04em;
+  line-height: 1;
+  margin: 16px 0;
+}
+.pricing-card.free .pricing-price { color: var(--slate-900); }
+.pricing-card.premium .pricing-price {
+  background: linear-gradient(135deg, var(--green-400), #10b981);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.pricing-price-sub { font-size: .875rem; font-weight: 400; }
+.pricing-desc {
+  font-size: .9rem;
+  margin-bottom: 28px;
+  line-height: 1.6;
+}
+.pricing-card.free .pricing-desc { color: var(--slate-500); }
+.pricing-card.premium .pricing-desc { color: rgba(255,255,255,.5); }
+.pricing-divider {
+  height: 1px;
+  margin: 0 0 24px;
+}
+.pricing-card.free .pricing-divider { background: var(--slate-200); }
+.pricing-card.premium .pricing-divider { background: rgba(255,255,255,.1); }
+.pricing-features { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+.pricing-feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: .9rem;
+  line-height: 1.4;
+}
+.pricing-card.free  .pricing-feature { color: var(--slate-600); }
+.pricing-card.premium .pricing-feature { color: rgba(255,255,255,.75); }
+.pricing-feature-check {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .65rem;
+}
+.pricing-card.free  .pricing-feature-check { background: var(--green-100); color: var(--green-700); }
+.pricing-card.premium .pricing-feature-check { background: rgba(34,197,94,.2); color: var(--green-400); }
+.pricing-cta-wrap { display: flex; flex-direction: column; gap: 10px; align-items: stretch; }
+.pricing-note { font-size: .78rem; text-align: center; }
+.pricing-card.free .pricing-note { color: var(--slate-400); }
+.pricing-card.premium .pricing-note { color: rgba(255,255,255,.3); }
+
+/* ═══════════════════════════════════════════
+   FAQ
+═══════════════════════════════════════════ */
+.faq-section { background: var(--slate-50); }
+.faq-list {
+  max-width: 720px;
+  margin: 48px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--slate-200);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 1px solid var(--slate-200);
+}
+.faq-item {
+  background: var(--white);
+  overflow: hidden;
+}
+.faq-item:first-child { border-radius: var(--radius-xl) var(--radius-xl) 0 0; }
+.faq-item:last-child  { border-radius: 0 0 var(--radius-xl) var(--radius-xl); }
+.faq-q {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--slate-900);
+  gap: 16px;
+  transition: background var(--transition);
+  user-select: none;
+}
+.faq-q:hover { background: var(--slate-50); }
+.faq-item.open .faq-q { background: var(--green-50); color: var(--green-800); }
+.faq-chevron {
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: var(--slate-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all var(--transition);
+  color: var(--slate-500);
+}
+.faq-item.open .faq-chevron {
+  background: var(--green-100);
+  color: var(--green-700);
+  transform: rotate(180deg);
+}
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .35s cubic-bezier(.4,0,.2,1);
+}
+.faq-a-inner {
+  padding: 0 24px 20px;
+  font-size: .9375rem;
+  color: var(--slate-600);
+  line-height: 1.7;
+}
+.faq-item.open .faq-a { max-height: 300px; }
+
+/* ═══════════════════════════════════════════
+   FINAL CTA
+═══════════════════════════════════════════ */
+.cta-section {
+  background: var(--slate-950);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-bg-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  pointer-events: none;
+}
+.cta-bg-glow-1 {
+  width: 600px; height: 400px;
+  background: radial-gradient(ellipse, rgba(34,197,94,.2) 0%, transparent 70%);
+  top: -100px; left: 50%;
+  transform: translateX(-50%);
+}
+.cta-content { position: relative; z-index: 1; }
+.cta-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(34,197,94,.1);
+  border: 1px solid rgba(34,197,94,.2);
+  font-size: .8125rem;
+  font-weight: 600;
+  color: var(--green-400);
+  margin-bottom: 24px;
+}
+.cta-headline {
+  font-size: clamp(2.2rem, 5vw, 3.75rem);
+  font-weight: 800;
+  letter-spacing: -.03em;
+  line-height: 1.07;
+  color: var(--white);
+  margin-bottom: 20px;
+}
+.cta-sub {
+  font-size: 1.1rem;
+  color: rgba(255,255,255,.5);
+  max-width: 480px;
+  margin: 0 auto 40px;
+  line-height: 1.65;
+}
+.cta-actions { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+.cta-disclaimer {
+  margin-top: 20px;
+  font-size: .8rem;
+  color: rgba(255,255,255,.25);
+}
+
+/* ═══════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════ */
+.footer {
+  background: var(--slate-950);
+  border-top: 1px solid rgba(255,255,255,.06);
+  padding: 48px 0 32px;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 48px;
+}
+.footer-brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.125rem;
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: 12px;
+  letter-spacing: -.025em;
+}
+.footer-brand-desc {
+  font-size: .875rem;
+  color: rgba(255,255,255,.35);
+  line-height: 1.65;
+  max-width: 280px;
+  margin-bottom: 20px;
+}
+.footer-social { display: flex; gap: 8px; }
+.footer-social-btn {
+  width: 36px; height: 36px;
+  border-radius: var(--radius-sm);
+  background: rgba(255,255,255,.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,.4);
+  font-size: .875rem;
+  transition: all var(--transition);
+  border: 1px solid rgba(255,255,255,.06);
+}
+.footer-social-btn:hover { background: rgba(255,255,255,.12); color: var(--white); border-color: rgba(255,255,255,.12); }
+.footer-col-title {
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.3);
+  margin-bottom: 16px;
+}
+.footer-links { display: flex; flex-direction: column; gap: 10px; }
+.footer-links a {
+  font-size: .875rem;
+  color: rgba(255,255,255,.45);
+  transition: color var(--transition);
+}
+.footer-links a:hover { color: var(--white); }
+.footer-bottom {
+  padding-top: 28px;
+  border-top: 1px solid rgba(255,255,255,.06);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.footer-copy { font-size: .825rem; color: rgba(255,255,255,.25); }
+.footer-disclaimer { font-size: .775rem; color: rgba(255,255,255,.2); max-width: 540px; line-height: 1.5; }
+
+/* ═══════════════════════════════════════════
+   DEMO MODAL
+═══════════════════════════════════════════ */
+.demo-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.82);
+  backdrop-filter: blur(14px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s ease;
+  padding: 20px;
+}
+.demo-overlay.open { opacity: 1; pointer-events: all; }
+.demo-modal {
+  background: var(--white);
+  border-radius: 28px;
+  width: 100%;
+  max-width: 460px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  transform: scale(.9) translateY(32px);
+  transition: transform .4s cubic-bezier(.34,1.56,.64,1);
+  box-shadow: 0 40px 100px rgba(0,0,0,.5);
+}
+.demo-overlay.open .demo-modal { transform: scale(1) translateY(0); }
+.demo-close-btn {
+  position: absolute;
+  top: 16px; right: 16px;
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: var(--slate-100);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .8rem;
+  color: var(--slate-500);
+  z-index: 1;
+  transition: all var(--transition);
+}
+.demo-close-btn:hover { background: var(--slate-200); color: var(--slate-800); }
+.demo-prog-bar { display: flex; gap: 4px; padding: 20px 24px 0; }
+.demo-prog-dot { flex: 1; height: 3px; border-radius: 999px; background: var(--slate-100); transition: background .4s; }
+.demo-prog-dot.done { background: var(--green-300); }
+.demo-prog-dot.active { background: var(--green-500); }
+.demo-step { display: none; padding: 20px 24px 24px; animation: stepIn .35s cubic-bezier(.34,1.56,.64,1); }
+.demo-step.active { display: block; }
+@keyframes stepIn { from { opacity:0; transform: translateX(18px); } to { opacity:1; transform:none; } }
+.demo-step-emoji { font-size: 2.25rem; margin-bottom: 10px; }
+.demo-step-h { font-size: 1.2rem; font-weight: 800; color: var(--slate-900); margin-bottom: 6px; letter-spacing: -.02em; }
+.demo-step-p { font-size: .875rem; color: var(--slate-500); line-height: 1.55; margin-bottom: 20px; }
+.demo-opts { display: flex; flex-direction: column; gap: 8px; }
+.demo-opt {
+  display: flex; align-items: center; gap: 12px;
+  padding: 13px 16px; border-radius: var(--radius-md);
+  border: 1.5px solid var(--slate-200); cursor: pointer;
+  transition: all var(--transition); font-size: .875rem;
+  font-weight: 500; color: var(--slate-700); user-select: none;
+}
+.demo-opt:hover { border-color: var(--green-400); background: var(--green-50); color: var(--green-800); }
+.demo-opt.picked { border-color: var(--green-500); background: var(--green-50); color: var(--green-800); }
+.demo-opt-em { font-size: 1.2rem; flex-shrink: 0; }
+.demo-opt-chk {
+  margin-left: auto; width: 20px; height: 20px; border-radius: 50%;
+  border: 1.5px solid var(--slate-300); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; transition: all var(--transition);
+}
+.demo-opt.picked .demo-opt-chk { background: var(--green-500); border-color: var(--green-500); }
+.demo-next {
+  width: 100%; margin-top: 18px;
+  background: linear-gradient(135deg, var(--green-600), var(--green-500));
+  color: white; border: none; border-radius: var(--radius-full);
+  padding: 13px; font-size: .9375rem; font-weight: 700; cursor: pointer;
+  transition: all var(--transition);
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  opacity: .35; pointer-events: none;
+}
+.demo-next.ready { opacity: 1; pointer-events: all; }
+.demo-next.ready:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(22,163,74,.35); }
+.demo-result-wrap { text-align: center; }
+.demo-result-score-big {
+  font-size: 4rem; font-weight: 900;
+  background: linear-gradient(135deg, var(--green-700), var(--green-500));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text; line-height: 1; margin: 16px 0 4px;
+}
+.demo-ideas-list { margin-top: 14px; display: flex; flex-direction: column; gap: 8px; }
+.demo-idea-row {
+  display: flex; align-items: center; gap: 10px; padding: 12px 14px;
+  border-radius: var(--radius-md); background: var(--slate-50);
+  border: 1px solid var(--slate-100); text-align: left;
+  animation: fadeInUp .45s ease both;
+}
+.demo-idea-row:nth-child(2) { animation-delay: .1s; }
+.demo-idea-row:nth-child(3) { animation-delay: .2s; }
+.demo-idea-num { width: 22px; height: 22px; border-radius: 50%; background: var(--green-100); color: var(--green-700); font-size: .65rem; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.demo-idea-nm { font-size: .875rem; font-weight: 600; color: var(--slate-800); flex: 1; }
+.demo-idea-earn { font-size: .78rem; font-weight: 700; color: var(--green-600); }
+
+/* ═══════════════════════════════════════════
+   TOASTS
+═══════════════════════════════════════════ */
+.toast-wrap {
+  position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%);
+  z-index: 9990; display: flex; flex-direction: column-reverse; gap: 8px;
+  align-items: center; pointer-events: none;
+}
+.toast-msg {
+  background: var(--slate-900); color: var(--white); padding: 11px 20px;
+  border-radius: var(--radius-full); font-size: .875rem; font-weight: 600;
+  display: flex; align-items: center; gap: 10px;
+  box-shadow: 0 8px 32px rgba(0,0,0,.35); border: 1px solid rgba(255,255,255,.07);
+  animation: toastIn .4s cubic-bezier(.34,1.56,.64,1) both; white-space: nowrap;
+}
+.toast-msg.out { animation: toastOut .3s ease forwards; }
+@keyframes toastIn { from { opacity:0; transform: translateY(16px) scale(.9); } to { opacity:1; transform:none; } }
+@keyframes toastOut { to { opacity:0; transform: translateY(-8px) scale(.95); } }
+
+/* ═══════════════════════════════════════════
+   CONFETTI
+═══════════════════════════════════════════ */
+.cfp {
+  position: fixed; pointer-events: none; z-index: 9995; border-radius: 2px;
+  animation: cfFall linear forwards;
+}
+@keyframes cfFall {
+  0%   { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(720deg) scale(.4); opacity: 0; }
+}
+
+/* ═══════════════════════════════════════════
+   ANIMATIONS
+═══════════════════════════════════════════ */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+}
+.fade-up {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+.fade-up.visible { opacity: 1; transform: none; }
+.fade-up-delay-1 { transition-delay: .1s; }
+.fade-up-delay-2 { transition-delay: .2s; }
+.fade-up-delay-3 { transition-delay: .3s; }
+.fade-up-delay-4 { transition-delay: .4s; }
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 56px; }
+  .hero-content { max-width: 100%; }
+  .hero-visual { order: -1; }
+  .phone-secondary { display: none; }
+  .features-grid { grid-template-columns: repeat(2, 1fr); }
+  .feature-card.featured { grid-column: span 1; }
+  .steps-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+  .steps-grid::before { display: none; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .quiz-container { grid-template-columns: 1fr; }
+  .quiz-result-panel { position: static; }
+}
+@media (max-width: 768px) {
+  section { padding: 64px 0; }
+  .nav-links { display: none; }
+  .nav-mobile-btn { display: flex; }
+  .hero { padding: 100px 0 60px; }
+  .hero-grid { gap: 40px; }
+  .trust-strip-inner { grid-template-columns: 1fr; }
+  .trust-item { border-right: none; border-bottom: 1px solid var(--slate-200); padding: 20px 24px; }
+  .trust-item:last-child { border-bottom: none; }
+  .features-grid { grid-template-columns: 1fr; }
+  .feature-card.featured { grid-column: span 1; }
+  .why-grid { grid-template-columns: 1fr; gap: 32px; }
+  .audience-grid { grid-template-columns: repeat(2, 1fr); }
+  .testimonials-grid { grid-template-columns: 1fr; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .preview-screens { gap: 16px; }
+  .preview-phone:nth-child(1), .preview-phone:nth-child(3) { display: none; }
+  .steps-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; }
+  .cta-actions { flex-direction: column; align-items: center; }
+}
+@media (max-width: 480px) {
+  .container { padding: 0 16px; }
+  .hero-actions { flex-direction: column; align-items: stretch; }
+  .hero-actions .btn { justify-content: center; }
+  .audience-grid { grid-template-columns: 1fr; }
+}
+/* ═══════════════════════════════════════════
+   STRIPE PAYMENT BUTTON STYLES
+═══════════════════════════════════════════ */
+.stripe-premium-btn {
+  position: relative;
+  overflow: hidden;
+}
+.stripe-premium-btn::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.15), transparent);
+  transition: left .5s ease;
+}
+.stripe-premium-btn:hover::before {
+  left: 120%;
+}
+.stripe-trust-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  font-size: .7rem;
+  font-weight: 600;
+  color: rgba(255,255,255,.35);
+}
+.stripe-trust-badge svg { flex-shrink: 0; }
+
+/* Payment success banner */
+.payment-success-bar {
+  position: fixed;
+  top: 64px; left: 0; right: 0;
+  z-index: 999;
+  background: linear-gradient(135deg, var(--green-600), var(--green-500));
+  color: white;
+  text-align: center;
+  padding: 12px 24px;
+  font-size: .875rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  animation: slideDown .4s ease;
+  box-shadow: 0 4px 12px rgba(34,197,94,.3);
+}
+@keyframes slideDown {
+  from { transform: translateY(-100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.payment-success-bar .close-bar {
+  position: absolute;
+  right: 16px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  opacity: .7;
+  transition: opacity .2s;
+}
+.payment-success-bar .close-bar:hover { opacity: 1; }
+
+/* ═══════════════════════════════════════════
+   ANIMATED LIST (scroll-reveal staggered items)
+═══════════════════════════════════════════ */
+.anim-list-item {
+  opacity: 0;
+  transform: translateY(32px) scale(0.92);
+  transition: opacity .5s cubic-bezier(.22,1,.36,1), transform .5s cubic-bezier(.22,1,.36,1);
+  will-change: opacity, transform;
+}
+.anim-list-item.anim-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+/* Stagger delays via data attribute — set by JS */
+.anim-list-item[data-delay="1"] { transition-delay: .1s; }
+.anim-list-item[data-delay="2"] { transition-delay: .2s; }
+.anim-list-item[data-delay="3"] { transition-delay: .3s; }
+.anim-list-item[data-delay="4"] { transition-delay: .4s; }
+.anim-list-item[data-delay="5"] { transition-delay: .5s; }
+.anim-list-item[data-delay="6"] { transition-delay: .6s; }
+
+/* Active/selected highlight for animated list items */
+.anim-list-item.anim-selected {
+  outline: 2px solid var(--green-400);
+  outline-offset: 4px;
+  box-shadow: 0 0 0 8px rgba(34,197,94,.08);
+}
+
+/* Gradient overlays for scrollable lists (top/bottom fade) */
+.anim-list-wrap {
+  position: relative;
+}
+.anim-list-wrap::before,
+.anim-list-wrap::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  height: 48px;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity .3s;
+}
+.anim-list-wrap::before {
+  top: 0;
+  background: linear-gradient(to bottom, var(--slate-50), transparent);
+}
+.anim-list-wrap::after {
+  bottom: 0;
+  background: linear-gradient(to top, var(--slate-50), transparent);
+}
+.anim-list-wrap.has-overflow-top::before { opacity: 1; }
+.anim-list-wrap.has-overflow-bottom::after { opacity: 1; }
+
+/* ═══════════════════════════════════════════
+   FLUID GLASS LENS (hero mouse-follow)
+═══════════════════════════════════════════ */
+#fluid-glass {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.8);
+  transition: opacity .4s ease, transform .3s ease;
+  /* Glass refraction effect */
+  background: radial-gradient(circle at 35% 35%,
+    rgba(255,255,255,.25) 0%,
+    rgba(255,255,255,.08) 40%,
+    rgba(34,197,94,.06) 70%,
+    transparent 100%
+  );
+  backdrop-filter: blur(12px) saturate(140%) brightness(1.08);
+  -webkit-backdrop-filter: blur(12px) saturate(140%) brightness(1.08);
+  border: 1.5px solid rgba(255,255,255,.35);
+  box-shadow:
+    inset 0 0 40px rgba(255,255,255,.12),
+    inset 0 -8px 20px rgba(34,197,94,.06),
+    0 8px 32px rgba(0,0,0,.08),
+    0 2px 8px rgba(34,197,94,.08);
+  mix-blend-mode: normal;
+}
+#fluid-glass::before {
+  content: '';
+  position: absolute;
+  top: 12%;
+  left: 18%;
+  width: 35%;
+  height: 20%;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(255,255,255,.45), transparent);
+  filter: blur(4px);
+}
+#fluid-glass::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 120deg,
+    transparent 0%,
+    rgba(34,197,94,.12) 25%,
+    transparent 50%,
+    rgba(255,255,255,.1) 75%,
+    transparent 100%
+  );
+  animation: glassRotate 8s linear infinite;
+}
+@keyframes glassRotate {
+  to { transform: rotate(360deg); }
+}
+.hero:hover #fluid-glass {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Glass lens inner refraction ring */
+#fluid-glass .glass-ring {
+  position: absolute;
+  inset: 8px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.12);
+  background: radial-gradient(circle at 60% 60%,
+    rgba(34,197,94,.04) 0%,
+    transparent 70%
+  );
+}
+
+/* ═══════════════════════════════════════════
+   SHIMMER EFFECT ON CARDS
+═══════════════════════════════════════════ */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.shimmer-border {
+  position: relative;
+}
+.shimmer-border::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: linear-gradient(90deg, transparent 0%, rgba(34,197,94,.3) 50%, transparent 100%);
+  background-size: 200% 100%;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: shimmer 4s ease-in-out infinite;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .3s;
+}
+.shimmer-border:hover::after { opacity: 1; }
+/* Brighter shimmer on dark backgrounds */
+.features-section .shimmer-border::after {
+  background: linear-gradient(90deg, transparent 0%, rgba(34,197,94,.45) 50%, transparent 100%);
+  background-size: 200% 100%;
+}
+.pricing-card.premium .shimmer-border::after,
+.pricing-card.premium.shimmer-border::after {
+  background: linear-gradient(90deg, transparent 0%, rgba(34,197,94,.4) 50%, transparent 100%);
+  background-size: 200% 100%;
+}
+
+/* ═══════════════════════════════════════════
+   FLOATING GRADIENT ORBS (ambient bg)
+═══════════════════════════════════════════ */
+.ambient-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(80px);
+  opacity: 0;
+  transition: opacity 1s ease;
+  z-index: 0;
+}
+.ambient-orb.visible { opacity: 1; }
+.ambient-orb-1 {
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(34,197,94,.12) 0%, transparent 70%);
+  animation: orbFloat1 12s ease-in-out infinite;
+}
+.ambient-orb-2 {
+  width: 250px; height: 250px;
+  background: radial-gradient(circle, rgba(16,185,129,.1) 0%, transparent 70%);
+  animation: orbFloat2 15s ease-in-out infinite;
+}
+.ambient-orb-3 {
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(99,102,241,.08) 0%, transparent 70%);
+  animation: orbFloat3 18s ease-in-out infinite;
+}
+@keyframes orbFloat1 {
+  0%,100% { transform: translate(0,0); }
+  33% { transform: translate(40px,-30px); }
+  66% { transform: translate(-20px,25px); }
+}
+@keyframes orbFloat2 {
+  0%,100% { transform: translate(0,0); }
+  50% { transform: translate(-35px,-40px); }
+}
+@keyframes orbFloat3 {
+  0%,100% { transform: translate(0,0); }
+  33% { transform: translate(25px,35px); }
+  66% { transform: translate(-30px,-15px); }
+}
+
+/* ═══════════════════════════════════════════
+   SECTION DIVIDER WAVES
+═══════════════════════════════════════════ */
+.section-wave {
+  position: relative;
+}
+.section-wave::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0; right: 0;
+  height: 48px;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 48' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 24c240-24 480 24 720 0s480-24 720 0v24H0z' fill='%23f8fafc'/%3E%3C/svg%3E") no-repeat center/cover;
+  pointer-events: none;
+  z-index: 1;
+}
+</style>
+</head>
+<body>
+
+<!-- SCROLL PROGRESS BAR -->
+<div id="scroll-progress"></div>
+
+<!-- CUSTOM CURSOR -->
+<div id="cursor-glow"></div>
+
+<!-- TOAST CONTAINER -->
+<div class="toast-wrap" id="toastWrap"></div>
+
+<!-- ═══════════════ NAV ═══════════════ -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-icon">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <text x="9" y="13.5" text-anchor="middle" font-family="Inter,sans-serif" font-weight="900" font-size="13" fill="white" fill-opacity=".92">$</text>
+        </svg>
+      </div>
+      Earnr AI
+    </a>
+    <ul class="nav-links">
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#quiz">Try it live</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="#" class="btn btn-secondary btn--sm">Sign in</a>
+      <a href="#" class="btn btn-primary btn--sm" id="navCta">Try for free</a>
+    </div>
+    <button class="nav-mobile-btn" id="mobileMenuBtn" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section class="hero section-wave" id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-dot-pattern"></div>
+  <div class="hero-dot-highlight" id="heroDotHL"></div>
+  <!-- Fluid Glass Lens -->
+  <div id="fluid-glass"><div class="glass-ring"></div></div>
+  <div class="hero-bg-blob hero-bg-blob-1"></div>
+  <div class="hero-bg-blob hero-bg-blob-2"></div>
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="hero-badge anim-list-item" data-delay="0">
+          <span class="badge badge-green">
+            <span class="badge-dot"></span>
+            AI-Powered &middot; Free to Start
+          </span>
+        </div>
+        <h1 class="hero-headline anim-list-item" data-delay="1">
+          Find your best way<br>to make money<br>
+          <span class="gradient-text" id="tw-target"></span><span class="tw-cursor" id="tw-cursor"></span>
+        </h1>
+        <p class="hero-sub anim-list-item" data-delay="2">
+          Earnr AI turns your real skills, interests, and free time into a personalized money plan — complete with an Opportunity Score and a step-by-step roadmap built around you.
+        </p>
+        <div class="hero-actions anim-list-item" data-delay="3" id="hero-cta">
+          <span class="magnetic-wrap" data-magnetic>
+            <a href="#" class="btn btn-primary btn--lg cta-confetti" id="heroPrimaryCta">
+              Start My Plan
+              <svg class="arrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </span>
+          <a href="#how" class="btn btn-secondary btn--lg">See how it works</a>
+        </div>
+        <div class="hero-proof anim-list-item" data-delay="4">
+          <div class="hero-proof-item anim-list-item" data-delay="4">
+            <div class="hero-proof-icon">
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 5.5l2.5 2.5 4.5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            Free to start
+          </div>
+          <div class="hero-divider"></div>
+          <div class="hero-proof-item anim-list-item" data-delay="5">
+            <div class="hero-proof-icon">
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 5.5l2.5 2.5 4.5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            No account needed
+          </div>
+          <div class="hero-divider"></div>
+          <div class="hero-proof-item anim-list-item" data-delay="6">
+            <div class="hero-proof-icon">
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 5.5l2.5 2.5 4.5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            Results in under 60s
+          </div>
+        </div>
+      </div>
+
+      <!-- Phone Mockup -->
+      <div class="hero-visual anim-list-item" data-delay="2">
+        <div class="phone-wrap">
+          <div class="phone">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+              <div class="app-screen screen-score">
+                <div class="screen-header">
+                  <span class="screen-logo">Earnr AI</span>
+                  <span class="screen-step">4 of 4</span>
+                </div>
+                <div class="score-title">Your Opportunity Score</div>
+                <div class="score-sub">Based on your skills &amp; available time</div>
+                <div class="score-ring-wrap">
+                  <div class="score-ring">
+                    <svg viewBox="0 0 120 120" id="scoreRingSvg">
+                      <defs>
+                        <linearGradient id="sg" x1="0%" y1="0%" x2="100%" y2="0%">
+                          <stop offset="0%" stop-color="#16a34a"/>
+                          <stop offset="100%" stop-color="#22c55e"/>
+                        </linearGradient>
+                      </defs>
+                      <circle class="score-ring-bg" cx="60" cy="60" r="54"/>
+                      <circle class="score-ring-fill" id="scoreRing" cx="60" cy="60" r="54"/>
+                    </svg>
+                    <div class="score-number">
+                      <span class="score-big" id="scoreNum">78</span>
+                      <span class="score-label">/ 100</span>
+                    </div>
+                  </div>
+                  <div class="score-badges">
+                    <span class="score-badge">&#9997;&#65039; Writing</span>
+                    <span class="score-badge">&#127912; Design</span>
+                    <span class="score-badge">&#128241; Social</span>
+                  </div>
+                </div>
+                <div class="screen-ideas">
+                  <div class="screen-idea-item">
+                    <div class="idea-icon idea-icon-1">&#9997;&#65039;</div>
+                    <div class="idea-text">
+                      <div class="idea-name">Freelance Copywriting</div>
+                      <div class="idea-time">5-10 hrs/week to start</div>
+                    </div>
+                    <div class="idea-earn">$25-$75/hr</div>
+                  </div>
+                  <div class="screen-idea-item">
+                    <div class="idea-icon idea-icon-2">&#128241;</div>
+                    <div class="idea-text">
+                      <div class="idea-name">Social Media Manager</div>
+                      <div class="idea-time">8-12 hrs/week</div>
+                    </div>
+                    <div class="idea-earn">$500-$2k/mo</div>
+                  </div>
+                  <div class="screen-idea-item">
+                    <div class="idea-icon idea-icon-3">&#127912;</div>
+                    <div class="idea-text">
+                      <div class="idea-name">Canva Template Creator</div>
+                      <div class="idea-time">Flexible hours</div>
+                    </div>
+                    <div class="idea-earn">Passive income</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="phone phone-secondary">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+              <div class="app-screen screen-question">
+                <div class="question-progress">
+                  <div class="progress-dot done"></div>
+                  <div class="progress-dot done"></div>
+                  <div class="progress-dot active"></div>
+                  <div class="progress-dot"></div>
+                </div>
+                <div class="question-emoji">&#9200;</div>
+                <div class="question-text">How much time can you invest each week?</div>
+                <div class="question-hint">Be realistic &mdash; this shapes your plan</div>
+                <div class="question-options">
+                  <div class="q-option">
+                    <div class="q-option-icon">&#127793;</div>
+                    Under 5 hours
+                    <div class="q-check"></div>
+                  </div>
+                  <div class="q-option selected">
+                    <div class="q-option-icon">&#127807;</div>
+                    5 - 15 hours
+                    <div class="q-check">
+                      <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 4l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+                    </div>
+                  </div>
+                  <div class="q-option">
+                    <div class="q-option-icon">&#127795;</div>
+                    15 - 30 hours
+                    <div class="q-check"></div>
+                  </div>
+                  <div class="q-option">
+                    <div class="q-option-icon">&#128640;</div>
+                    Full-time ready
+                    <div class="q-check"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ TRUST STRIP ═══════════════ -->
+<div class="trust-strip">
+  <div class="container">
+    <div class="trust-strip-inner">
+      <div class="trust-item anim-list-item" data-delay="0">
+        <div class="trust-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L3 6v5c0 4.4 3 8.5 7 9.5 4-1 7-5.1 7-9.5V6l-7-4z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M7 10l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="trust-text">
+          <strong>Not a get-rich-quick app</strong>
+          <span>Realistic ideas matched to your actual situation</span>
+        </div>
+      </div>
+      <div class="trust-item anim-list-item" data-delay="1">
+        <div class="trust-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.5"/><path d="M10 6v4l3 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="trust-text">
+          <strong>Results in under 60 seconds</strong>
+          <span>Answer a few questions, get your personalized plan</span>
+        </div>
+      </div>
+      <div class="trust-item anim-list-item" data-delay="2">
+        <div class="trust-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2c-2.2 0-4 2.5-4 5.5S7.8 13 10 13s4-2.5 4-5.5S12.2 2 10 2z" stroke="currentColor" stroke-width="1.5"/><path d="M4 18c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="trust-text">
+          <strong>Built around your real strengths</strong>
+          <span>Personalized to your skills, time, and preferences</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ HOW IT WORKS ═══════════════ -->
+<section class="how-section" id="how">
+  <div class="container">
+    <div class="section-header">
+      <p class="label anim-list-item" data-delay="0">How it works</p>
+      <h2 class="headline anim-list-item" data-delay="1">From zero to a clear money plan<br>in four simple steps</h2>
+      <p class="subheadline anim-list-item" data-delay="2">No fluff. No fake promises. Just a smart, honest look at what's realistic for you right now.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step anim-list-item" data-delay="0">
+        <div class="step-num">&#129504;</div>
+        <div class="step-title">Answer smart questions</div>
+        <div class="step-desc">Tell us what you do, what you enjoy, and how much time you can realistically give. Takes less than a minute.</div>
+      </div>
+      <div class="step anim-list-item" data-delay="1">
+        <div class="step-num">&#128202;</div>
+        <div class="step-title">Get your Opportunity Score</div>
+        <div class="step-desc">Our AI scores your income potential based on your unique combination of skills, interests, and availability.</div>
+      </div>
+      <div class="step anim-list-item" data-delay="2">
+        <div class="step-num">&#128506;&#65039;</div>
+        <div class="step-title">Unlock your Money Map</div>
+        <div class="step-desc">Receive personalized income ideas with estimated earning ranges and honest effort levels &mdash; tailored to you.</div>
+      </div>
+      <div class="step anim-list-item" data-delay="3">
+        <div class="step-num">&#128640;</div>
+        <div class="step-title">Start taking action</div>
+        <div class="step-desc">Follow a clear, step-by-step roadmap for your top opportunity. No guesswork, no overwhelm &mdash; just next steps.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FEATURES ═══════════════ -->
+<section class="features-section" id="features" style="position:relative;">
+  <div class="ambient-orb ambient-orb-1" style="top:10%;left:-5%;"></div>
+  <div class="ambient-orb ambient-orb-2" style="bottom:15%;right:-3%;"></div>
+  <div class="container">
+    <div class="section-header">
+      <p class="label anim-list-item" data-delay="0">What you get</p>
+      <h2 class="headline anim-list-item" data-delay="1">Every tool you need to find<br>your income path</h2>
+      <p class="subheadline anim-list-item" data-delay="2">Practical features designed around one goal &mdash; helping you make real progress.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card featured tilt-card shimmer-border anim-list-item" data-delay="0">
+        <div class="tilt-shine"></div>
+        <div class="feature-card-tag">Core Feature</div>
+        <div class="feature-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.75"/><path d="M12 7v5l3.5 2" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
+        </div>
+        <div class="feature-title">AI-Powered Money Map</div>
+        <div class="feature-desc">Your personalized roadmap of income ideas ranked by fit, effort, and earning potential. Not generic advice &mdash; ideas built around who you actually are, with honest timelines and realistic earning ranges.</div>
+      </div>
+      <div class="feature-card tilt-card shimmer-border anim-list-item" data-delay="1">
+        <div class="tilt-shine"></div>
+        <div class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="9" stroke="currentColor" stroke-width="1.75"/><path d="M7 11l3 3 5-5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="feature-title">Opportunity Score</div>
+        <div class="feature-desc">A clear 0-100 score showing your income readiness across your skill areas. Know exactly where your strengths create the most opportunity.</div>
+      </div>
+      <div class="feature-card tilt-card shimmer-border anim-list-item" data-delay="2">
+        <div class="tilt-shine"></div>
+        <div class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 3L4 7v6c0 5 3.5 9.5 7 10.5 3.5-1 7-5.5 7-10.5V7l-7-4z" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="feature-title">Personalized Ideas Only</div>
+        <div class="feature-desc">Zero generic suggestions. Every idea is filtered through your actual skills, schedule, and preferences before it ever reaches you.</div>
+      </div>
+      <div class="feature-card tilt-card shimmer-border anim-list-item" data-delay="3">
+        <div class="tilt-shine"></div>
+        <div class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4 6h14M4 11h10M4 16h7" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
+        </div>
+        <div class="feature-title">Step-by-Step Roadmap</div>
+        <div class="feature-desc">Each income idea comes with a clear action sequence so you know exactly what to do first, second, and third.</div>
+      </div>
+      <div class="feature-card tilt-card shimmer-border anim-list-item" data-delay="4">
+        <div class="tilt-shine"></div>
+        <div class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 2v4M11 16v4M2 11h4M16 11h4M4.9 4.9l2.8 2.8M14.3 14.3l2.8 2.8M4.9 17.1l2.8-2.8M14.3 7.7l2.8-2.8" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
+        </div>
+        <div class="feature-title">Fast AI Onboarding</div>
+        <div class="feature-desc">A short, smart question flow that takes less than 60 seconds. Designed to surface insights from answers most people overlook.</div>
+      </div>
+      <div class="feature-card tilt-card shimmer-border anim-list-item" data-delay="5">
+        <div class="tilt-shine"></div>
+        <div class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M12 2l3 6 7 1-5 4.5 1.2 7L12 17l-6.2 3.5L7 13.5 2 9l7-1z" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="feature-title">Premium Deep Strategy</div>
+        <div class="feature-desc">Upgrade to unlock more ideas, deeper strategy, extended money maps, and advanced personalization for serious results.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ APP PREVIEW ═══════════════ -->
+<section class="preview-section">
+  <div class="container">
+    <div class="section-header">
+      <p class="label anim-list-item" data-delay="0">See the app</p>
+      <h2 class="headline anim-list-item" data-delay="1">Clean. Simple.<br>Built for clarity</h2>
+      <p class="subheadline anim-list-item" data-delay="2">Every screen is designed to move you forward &mdash; not overwhelm you with noise.</p>
+    </div>
+  </div>
+  <div class="preview-screens">
+    <div class="preview-phone anim-list-item" data-delay="0">
+      <div class="preview-phone-screen">
+        <div class="mini-screen mini-onboard">
+          <div class="mini-onboard-icon">&#128161;</div>
+          <h3>Discover your best income path</h3>
+          <p>Answer a few questions about your skills and time. We'll build your personalized money plan in seconds.</p>
+          <div class="mini-onboard-btn">Get Started &mdash; It's Free</div>
+          <div class="mini-onboard-trust">
+            <span class="mini-trust-pill">&#9201; Under 60 sec</span>
+            <span class="mini-trust-pill">&#128274; Private</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="preview-phone anim-list-item" data-delay="1">
+      <div class="preview-phone-screen">
+        <div class="app-screen screen-score" style="padding-top:16px;">
+          <div class="screen-header">
+            <span class="screen-logo">Earnr AI</span>
+            <span class="screen-step">Results</span>
+          </div>
+          <div class="score-title">Your Opportunity Score</div>
+          <div class="score-sub">Based on your skills &amp; available time</div>
+          <div class="score-ring-wrap">
+            <div class="score-ring">
+              <svg viewBox="0 0 120 120">
+                <defs><linearGradient id="sg2" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#16a34a"/><stop offset="100%" stop-color="#22c55e"/></linearGradient></defs>
+                <circle class="score-ring-bg" cx="60" cy="60" r="54"/>
+                <circle class="score-ring-fill" cx="60" cy="60" r="54" style="stroke:url(#sg2);stroke-dasharray:339;stroke-dashoffset:68;"/>
+              </svg>
+              <div class="score-number">
+                <span class="score-big">82</span>
+                <span class="score-label">/ 100</span>
+              </div>
+            </div>
+          </div>
+          <div class="screen-ideas">
+            <div class="screen-idea-item">
+              <div class="idea-icon idea-icon-1">&#9997;&#65039;</div>
+              <div class="idea-text"><div class="idea-name">Freelance Writing</div><div class="idea-time">Best match for you</div></div>
+              <div class="idea-earn">$35-$85/hr</div>
+            </div>
+            <div class="screen-idea-item">
+              <div class="idea-icon idea-icon-2">&#127891;</div>
+              <div class="idea-text"><div class="idea-name">Online Tutoring</div><div class="idea-time">5 hrs/week min</div></div>
+              <div class="idea-earn">$20-$60/hr</div>
+            </div>
+            <div class="screen-idea-item">
+              <div class="idea-icon idea-icon-3">&#128200;</div>
+              <div class="idea-text"><div class="idea-name">Digital Products</div><div class="idea-time">Flexible schedule</div></div>
+              <div class="idea-earn">Passive</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="preview-phone anim-list-item" data-delay="2">
+      <div class="preview-phone-screen">
+        <div class="mini-screen mini-map" style="padding:16px;min-height:380px;display:flex;flex-direction:column;">
+          <div class="mini-map-header">
+            <div class="mini-map-title">Your Money Map</div>
+            <div class="mini-map-badge">&#128506;&#65039; Roadmap</div>
+          </div>
+          <div style="font-size:.7rem;color:#64748b;margin-bottom:12px;font-weight:500;">Freelance Writing &middot; Getting Started</div>
+          <div class="mini-map-item">
+            <div class="mini-map-step">1</div>
+            <div><div class="mini-map-item-text">Set up your portfolio</div><div class="mini-map-item-meta">Create 2-3 writing samples &middot; 2 hrs</div></div>
+          </div>
+          <div class="mini-map-item">
+            <div class="mini-map-step">2</div>
+            <div><div class="mini-map-item-text">Join Upwork or Contra</div><div class="mini-map-item-meta">Free to join &middot; 30 min setup</div></div>
+          </div>
+          <div class="mini-map-item">
+            <div class="mini-map-step">3</div>
+            <div><div class="mini-map-item-text">Send 5 tailored proposals</div><div class="mini-map-item-meta">Use the included template &middot; 1 hr</div></div>
+          </div>
+          <div class="mini-map-item" style="opacity:.5;">
+            <div class="mini-map-step locked">4</div>
+            <div><div class="mini-map-item-text" style="color:#94a3b8;">Land your first client</div><div class="mini-map-item-meta">Premium step</div></div>
+          </div>
+          <div class="mini-map-item" style="opacity:.5;">
+            <div class="mini-map-step locked">5</div>
+            <div><div class="mini-map-item-text" style="color:#94a3b8;">Scale your rates</div><div class="mini-map-item-meta">Premium step</div></div>
+          </div>
+          <div style="margin-top:auto;padding-top:12px;">
+            <div style="background:linear-gradient(135deg,#16a34a,#22c55e);color:white;border-radius:999px;padding:9px 14px;font-size:.7rem;font-weight:700;text-align:center;">&#128275; Unlock full roadmap</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ WHY DIFFERENT ═══════════════ -->
+<section class="why-section">
+  <div class="container">
+    <div class="section-header">
+      <p class="label anim-list-item" data-delay="0">Why Earnr AI</p>
+      <h2 class="headline anim-list-item" data-delay="1">Built different.<br>By design.</h2>
+      <p class="subheadline anim-list-item" data-delay="2">Most "make money" apps are vague, generic, or borderline dishonest. We built something worth trusting.</p>
+    </div>
+    <div class="why-grid">
+      <div class="anim-list-item" data-delay="0">
+        <div class="why-col-label bad">Other apps</div>
+        <div class="why-list">
+          <div class="why-item bad anim-list-item" data-delay="0"><div class="why-item-icon">&#10005;</div><div class="why-item-text">Promise unrealistic income with no effort required</div></div>
+          <div class="why-item bad anim-list-item" data-delay="1"><div class="why-item-icon">&#10005;</div><div class="why-item-text">Show the same generic advice to everyone</div></div>
+          <div class="why-item bad anim-list-item" data-delay="2"><div class="why-item-icon">&#10005;</div><div class="why-item-text">Vague ideas with no clear starting point</div></div>
+          <div class="why-item bad anim-list-item" data-delay="3"><div class="why-item-icon">&#10005;</div><div class="why-item-text">Ignore your schedule, skills, and real life</div></div>
+          <div class="why-item bad anim-list-item" data-delay="4"><div class="why-item-icon">&#10005;</div><div class="why-item-text">Built to sell courses, not help you succeed</div></div>
+        </div>
+      </div>
+      <div class="anim-list-item" data-delay="1">
+        <div class="why-col-label good">Earnr AI</div>
+        <div class="why-list">
+          <div class="why-item good anim-list-item" data-delay="0"><div class="why-item-icon">&#10003;</div><div class="why-item-text">Realistic earning ranges with honest effort levels</div></div>
+          <div class="why-item good anim-list-item" data-delay="1"><div class="why-item-icon">&#10003;</div><div class="why-item-text">Every suggestion is personalized to your answers</div></div>
+          <div class="why-item good anim-list-item" data-delay="2"><div class="why-item-icon">&#10003;</div><div class="why-item-text">Step-by-step roadmap so you always know what to do next</div></div>
+          <div class="why-item good anim-list-item" data-delay="3"><div class="why-item-icon">&#10003;</div><div class="why-item-text">Built around your schedule, skills, and preferences</div></div>
+          <div class="why-item good anim-list-item" data-delay="4"><div class="why-item-icon">&#10003;</div><div class="why-item-text">Focused on your progress, not selling you things</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ SOCIAL PROOF ═══════════════ -->
+<section class="proof-section" style="position:relative;overflow:hidden;">
+  <div class="ambient-orb ambient-orb-3" style="top:20%;right:5%;"></div>
+  <div class="ambient-orb ambient-orb-1" style="bottom:10%;left:8%;"></div>
+  <div class="container">
+    <div class="section-header">
+      <p class="label anim-list-item" data-delay="0">Who it's for</p>
+      <h2 class="headline anim-list-item" data-delay="1">Built for people who want<br>real results, not hype</h2>
+      <p class="subheadline anim-list-item" data-delay="2">Whether you're starting from scratch or looking for your next income stream &mdash; Earnr AI meets you where you are.</p>
+    </div>
+    <div class="audience-grid">
+      <div class="audience-card tilt-card shimmer-border anim-list-item" data-delay="0"><div class="tilt-shine"></div><div class="audience-emoji">&#127891;</div><div class="audience-label">Students</div><div class="audience-desc">Turn your knowledge and spare time into freelance income between classes</div></div>
+      <div class="audience-card tilt-card shimmer-border anim-list-item" data-delay="1"><div class="tilt-shine"></div><div class="audience-emoji">&#128188;</div><div class="audience-label">Side Hustlers</div><div class="audience-desc">Find income ideas that actually fit around a full-time job schedule</div></div>
+      <div class="audience-card tilt-card shimmer-border anim-list-item" data-delay="2"><div class="tilt-shine"></div><div class="audience-emoji">&#127912;</div><div class="audience-label">Creators</div><div class="audience-desc">Discover which of your creative skills have the most income potential</div></div>
+      <div class="audience-card tilt-card shimmer-border anim-list-item" data-delay="3"><div class="tilt-shine"></div><div class="audience-emoji">&#127793;</div><div class="audience-label">Beginners</div><div class="audience-desc">No experience needed &mdash; we find the best starting point based on what you already know</div></div>
+    </div>
+
+    <div class="section-header" style="margin-bottom:32px;">
+      <p class="label anim-list-item" data-delay="0">Early feedback</p>
+      <h2 class="headline anim-list-item" data-delay="1" style="font-size:clamp(1.5rem,3vw,2.25rem);">What early users are saying</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial featured tilt-card shimmer-border anim-list-item" data-delay="0">
+        <div class="tilt-shine"></div>
+        <div class="testimonial-badge">&#11088; Top review</div>
+        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="testimonial-text">"I've tried five of these apps and they all gave me the same useless 'start a dropshipping store' advice. Earnr AI actually looked at what I'm good at and gave me three ideas I could realistically start this week."</div>
+        <div class="testimonial-author">
+          <div class="author-avi author-avi-1">SL</div>
+          <div><div class="author-name">Sara L.</div><div class="author-role">Graphic designer, part-time</div></div>
+        </div>
+      </div>
+      <div class="testimonial tilt-card shimmer-border anim-list-item" data-delay="1">
+        <div class="tilt-shine"></div>
+        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="testimonial-text">"The Opportunity Score alone made me rethink my skills. I didn't realize my tutoring background scored that high. Now I'm running sessions on Saturdays &mdash; started in week two."</div>
+        <div class="testimonial-author">
+          <div class="author-avi author-avi-2">MT</div>
+          <div><div class="author-name">Marcus T.</div><div class="author-role">College student, junior year</div></div>
+        </div>
+      </div>
+      <div class="testimonial tilt-card shimmer-border anim-list-item" data-delay="2">
+        <div class="tilt-shine"></div>
+        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+        <div class="testimonial-text">"Refreshingly honest. It told me my idea had lower potential but explained why &mdash; and suggested a better version of it. That kind of transparency is rare. I trust it."</div>
+        <div class="testimonial-author">
+          <div class="author-avi author-avi-3">JR</div>
+          <div><div class="author-name">Jade R.</div><div class="author-role">Freelancer, 2 years in</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ INTERACTIVE QUIZ ═══════════════ -->
+<section class="quiz-section" id="quiz">
+  <div class="container">
+    <div class="section-header">
+      <p class="label anim-list-item" data-delay="0">Try it now</p>
+      <h2 class="headline anim-list-item" data-delay="1">See your Opportunity Score<br>in real time</h2>
+      <p class="subheadline anim-list-item" data-delay="2">Select your skills and availability below. Your score updates live.</p>
+    </div>
+    <div class="quiz-container anim-list-item" data-delay="3">
+      <div class="quiz-panel">
+        <div class="quiz-panel-title">Select your skills</div>
+        <div class="quiz-skills-grid" id="quizSkills">
+          <div class="skill-pill anim-list-item" data-delay="0" data-skill="writing">&#9997;&#65039; Writing</div>
+          <div class="skill-pill anim-list-item" data-delay="0" data-skill="design">&#127912; Design</div>
+          <div class="skill-pill anim-list-item" data-delay="1" data-skill="coding">&#128187; Coding</div>
+          <div class="skill-pill anim-list-item" data-delay="1" data-skill="social">&#128241; Social Media</div>
+          <div class="skill-pill anim-list-item" data-delay="2" data-skill="video">&#127909; Video</div>
+          <div class="skill-pill anim-list-item" data-delay="2" data-skill="teaching">&#127891; Teaching</div>
+          <div class="skill-pill anim-list-item" data-delay="3" data-skill="marketing">&#128227; Marketing</div>
+          <div class="skill-pill anim-list-item" data-delay="3" data-skill="music">&#127925; Music</div>
+          <div class="skill-pill anim-list-item" data-delay="4" data-skill="photo">&#128247; Photography</div>
+          <div class="skill-pill anim-list-item" data-delay="4" data-skill="sales">&#128176; Sales</div>
+          <div class="skill-pill anim-list-item" data-delay="5" data-skill="data">&#128202; Data</div>
+          <div class="skill-pill anim-list-item" data-delay="5" data-skill="language">&#127760; Languages</div>
+        </div>
+        <div class="quiz-row-label anim-list-item" data-delay="3">Available time per week</div>
+        <div class="time-options" id="quizTime">
+          <div class="time-opt anim-list-item" data-delay="4" data-time="5">Under 5 hrs</div>
+          <div class="time-opt anim-list-item" data-delay="4" data-time="15">5-15 hrs</div>
+          <div class="time-opt anim-list-item" data-delay="5" data-time="30">15-30 hrs</div>
+          <div class="time-opt anim-list-item" data-delay="5" data-time="40">Full-time</div>
+        </div>
+      </div>
+      <div class="quiz-result-panel" id="quizResult">
+        <div class="quiz-score-ring">
+          <svg viewBox="0 0 160 160">
+            <defs><linearGradient id="qGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#16a34a"/><stop offset="100%" stop-color="#4ade80"/></linearGradient></defs>
+            <circle class="qring-bg" cx="80" cy="80" r="70"/>
+            <circle class="qring-fill" id="qRing" cx="80" cy="80" r="70"/>
+          </svg>
+          <div class="quiz-score-number">
+            <span class="qscore-big" id="qScore">0</span>
+            <span class="qscore-sub">/ 100</span>
+          </div>
+        </div>
+        <div class="quiz-result-title" id="qTitle">Your Opportunity Score</div>
+        <div class="quiz-result-desc" id="qDesc">Select skills and time to see your personalized score.</div>
+        <div class="quiz-ideas-list" id="qIdeas">
+          <div class="quiz-empty">Your top income ideas will appear here</div>
+        </div>
+        <button class="quiz-cta-btn cta-confetti" id="quizCta">Get My Full Plan &rarr;</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ PRICING ═══════════════ -->
+<section class="pricing-section" id="pricing">
+  <div class="container">
+    <div class="section-header">
+      <p class="label anim-list-item" data-delay="0">Simple pricing</p>
+      <h2 class="headline anim-list-item" data-delay="1">Start free. Upgrade when<br>you're ready to go deeper.</h2>
+      <p class="subheadline anim-list-item" data-delay="2">No subscription traps. No fake free tiers. Try the core experience completely free.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="pricing-card free tilt-card shimmer-border anim-list-item" data-delay="0">
+        <div class="tilt-shine"></div>
+        <div class="pricing-badge">Free forever</div>
+        <div class="pricing-name">Starter</div>
+        <div class="pricing-desc">Get a real taste of what Earnr AI can do. No credit card. No catch.</div>
+        <div class="pricing-price">$0 <span class="pricing-price-sub" style="color:#64748b;font-size:1rem;">/ always</span></div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li class="pricing-feature"><span class="pricing-feature-check">&#10003;</span> Full onboarding question flow</li>
+          <li class="pricing-feature"><span class="pricing-feature-check">&#10003;</span> Your Opportunity Score (0-100)</li>
+          <li class="pricing-feature"><span class="pricing-feature-check">&#10003;</span> 1 personalized income idea with effort level</li>
+          <li class="pricing-feature"><span class="pricing-feature-check">&#10003;</span> Basic 3-step Money Map</li>
+          <li class="pricing-feature"><span class="pricing-feature-check">&#10003;</span> Earning range estimate</li>
+        </ul>
+        <div class="pricing-cta-wrap">
+          <a href="#" class="btn btn-secondary" style="justify-content:center;">Start for free</a>
+          <div class="pricing-note">No account required to try</div>
+        </div>
+      </div>
+      <div class="pricing-card premium tilt-card shimmer-border anim-list-item" data-delay="1">
+        <div class="tilt-shine"></div>
+        <div class="pricing-badge">Most popular</div>
+        <div class="pricing-name">Premium</div>
+        <div class="pricing-desc" style="color:rgba(255,255,255,.5);">Everything you need to go from idea to income with confidence and clarity.</div>
+        <div class="pricing-price">$9 <span class="pricing-price-sub" style="color:rgba(255,255,255,.4);font-size:1rem;">/ month</span></div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li class="pricing-feature"><span class="pricing-feature-check">&#10003;</span> Everything in Starter</li>
+          <li class="pricing-feature"><span class="pricing-feature-check">&#10003;</span> Up to 5 personalized income ideas</li>
+          <li class="pricing-feature"><span class="pricing-feature-check">&#10003;</span> Extended Money Map (8-10 action steps)</li>
+          <li class="pricing-feature"><span class="pricing-feature-check">&#10003;</span> Deeper AI strategy per idea</li>
+          <li class="pricing-feature"><span class="pricing-feature-check">&#10003;</span> Advanced skill-match scoring</li>
+          <li class="pricing-feature"><span class="pricing-feature-check">&#10003;</span> Priority updates and new features</li>
+        </ul>
+        <div class="pricing-cta-wrap">
+          <span class="magnetic-wrap" data-magnetic>
+            <a href="#" class="btn btn-primary stripe-premium-btn" id="premiumCta" style="justify-content:center;width:100%;">
+              Get Premium
+              <svg class="arrow" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7h9M8 3.5L11.5 7 8 10.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </span>
+          <div class="pricing-note">Cancel anytime &middot; Results depend on your effort</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FAQ ═══════════════ -->
+<section class="faq-section" id="faq">
+  <div class="container container--narrow">
+    <div class="section-header">
+      <p class="label anim-list-item" data-delay="0">Common questions</p>
+      <h2 class="headline anim-list-item" data-delay="1">Everything you need to know</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item open anim-list-item" data-delay="0">
+        <div class="faq-q" onclick="toggleFaq(this)">What exactly is Earnr AI?<span class="faq-chevron"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+        <div class="faq-a"><div class="faq-a-inner">Earnr AI is a personalized income discovery tool. It asks you a short set of smart questions about your skills, interests, and available time &mdash; then uses AI to generate realistic income ideas matched specifically to your profile, along with an Opportunity Score and a step-by-step Money Map.</div></div>
+      </div>
+      <div class="faq-item anim-list-item" data-delay="1">
+        <div class="faq-q" onclick="toggleFaq(this)">Is this a get-rich-quick app?<span class="faq-chevron"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+        <div class="faq-a"><div class="faq-a-inner">Absolutely not &mdash; and we're proud to say that clearly. Earnr AI shows you realistic income paths based on real effort. Every idea includes an honest effort estimate and earning range. We don't make income guarantees because no one responsibly can.</div></div>
+      </div>
+      <div class="faq-item anim-list-item" data-delay="2">
+        <div class="faq-q" onclick="toggleFaq(this)">How personalized are the results?<span class="faq-chevron"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+        <div class="faq-a"><div class="faq-a-inner">Deeply. Every income idea, Opportunity Score, and roadmap step is generated from your specific answers &mdash; not a template. Two people with different skills and schedules will get completely different plans.</div></div>
+      </div>
+      <div class="faq-item anim-list-item" data-delay="3">
+        <div class="faq-q" onclick="toggleFaq(this)">Do you guarantee I'll make money?<span class="faq-chevron"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+        <div class="faq-a"><div class="faq-a-inner">No &mdash; and we won't pretend to. Earnr AI gives you a personalized plan built on realistic opportunities. Whether those opportunities turn into income depends on your effort, consistency, and execution.</div></div>
+      </div>
+      <div class="faq-item anim-list-item" data-delay="4">
+        <div class="faq-q" onclick="toggleFaq(this)">Who is Earnr AI actually for?<span class="faq-chevron"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+        <div class="faq-a"><div class="faq-a-inner">Anyone who wants to make extra income but doesn't know where to start &mdash; or wants a clearer picture of which opportunity fits them best. Students, freelancers, creatives, parents with limited hours, and complete beginners.</div></div>
+      </div>
+      <div class="faq-item anim-list-item" data-delay="5">
+        <div class="faq-q" onclick="toggleFaq(this)">What do I get with Premium vs. Free?<span class="faq-chevron"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+        <div class="faq-a"><div class="faq-a-inner">The free tier gives you one personalized income idea, your Opportunity Score, and a basic 3-step roadmap. Premium unlocks up to 5 ideas, an extended 8-10 step Money Map, deeper AI strategy, and advanced scoring.</div></div>
+      </div>
+      <div class="faq-item anim-list-item" data-delay="5">
+        <div class="faq-q" onclick="toggleFaq(this)">How long does the onboarding take?<span class="faq-chevron"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+        <div class="faq-a"><div class="faq-a-inner">Less than 60 seconds for most people. We've deliberately kept the question flow short and focused. We ask only the questions that actually improve your results.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FINAL CTA ═══════════════ -->
+<section class="cta-section">
+  <div class="cta-bg-glow cta-bg-glow-1"></div>
+  <div class="container container--narrow">
+    <div class="cta-content anim-list-item" data-delay="0">
+      <div class="cta-badge">
+        <span class="badge-dot"></span>
+        Free to start &middot; No account needed
+      </div>
+      <h2 class="cta-headline">
+        Your income plan is<br>
+        <span class="gradient-text">60 seconds away</span>
+      </h2>
+      <p class="cta-sub">Stop guessing what you should do to make extra money. Let Earnr AI show you exactly where your strengths create the most opportunity &mdash; then give you a clear path forward.</p>
+      <div class="cta-actions">
+        <span class="magnetic-wrap" data-magnetic>
+          <a href="#" class="btn btn-primary btn--lg cta-confetti">
+            Start My Plan &mdash; It's Free
+            <svg class="arrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </span>
+        <a href="#how" class="btn btn-ghost btn--lg" style="color:rgba(255,255,255,.5);border:1.5px solid rgba(255,255,255,.12);">See how it works</a>
+      </div>
+      <p class="cta-disclaimer">Personalized ideas, not guaranteed income. Results depend on your effort and execution.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="anim-list-item" data-delay="0">
+        <div class="footer-brand-logo">
+          <div class="nav-logo-icon">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <text x="9" y="13.5" text-anchor="middle" font-family="Inter,sans-serif" font-weight="900" font-size="13" fill="white" fill-opacity=".92">$</text>
+            </svg>
+          </div>
+          Earnr AI
+        </div>
+        <p class="footer-brand-desc">Find your best way to make money based on your real skills, interests, and available time. A personalized money plan in under 60 seconds.</p>
+        <div class="footer-social">
+          <a href="#" class="footer-social-btn anim-list-item" data-delay="1" aria-label="Twitter">&#120143;</a>
+          <a href="#" class="footer-social-btn anim-list-item" data-delay="2" aria-label="Instagram">&#128248;</a>
+          <a href="#" class="footer-social-btn anim-list-item" data-delay="3" aria-label="TikTok">&#9834;</a>
+        </div>
+      </div>
+      <div class="anim-list-item" data-delay="1">
+        <div class="footer-col-title">Product</div>
+        <ul class="footer-links">
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#">Changelog</a></li>
+        </ul>
+      </div>
+      <div class="anim-list-item" data-delay="2">
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-links">
+          <li><a href="#">About</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="anim-list-item" data-delay="3">
+        <div class="footer-col-title">Legal</div>
+        <ul class="footer-links">
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Cookie Policy</a></li>
+          <li><a href="#">Disclaimer</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom anim-list-item" data-delay="4">
+      <div class="footer-copy">&copy; 2025 Earnr AI. All rights reserved.</div>
+      <div class="footer-disclaimer">Earnr AI provides personalized suggestions for income opportunities. We do not guarantee any specific income or results. All earning ranges are estimates based on general market data.</div>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════ DEMO MODAL ═══════════════ -->
+<div class="demo-overlay" id="demoOverlay">
+  <div class="demo-modal">
+    <button class="demo-close-btn" id="demoClose">&#10005;</button>
+    <div class="demo-prog-bar" id="demoProg">
+      <div class="demo-prog-dot active"></div>
+      <div class="demo-prog-dot"></div>
+      <div class="demo-prog-dot"></div>
+      <div class="demo-prog-dot"></div>
+    </div>
+
+    <!-- Step 1 -->
+    <div class="demo-step active" data-step="0">
+      <div class="demo-step-emoji">&#129504;</div>
+      <div class="demo-step-h">What are you best at?</div>
+      <div class="demo-step-p">Pick the skill that comes most naturally to you.</div>
+      <div class="demo-opts">
+        <div class="demo-opt" data-val="writing"><span class="demo-opt-em">&#9997;&#65039;</span> Writing &amp; communication <span class="demo-opt-chk"></span></div>
+        <div class="demo-opt" data-val="design"><span class="demo-opt-em">&#127912;</span> Design &amp; visual creativity <span class="demo-opt-chk"></span></div>
+        <div class="demo-opt" data-val="tech"><span class="demo-opt-em">&#128187;</span> Tech &amp; coding <span class="demo-opt-chk"></span></div>
+        <div class="demo-opt" data-val="social"><span class="demo-opt-em">&#128241;</span> Social media &amp; content <span class="demo-opt-chk"></span></div>
+      </div>
+      <button class="demo-next" id="demoNext">Continue &rarr;</button>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="demo-step" data-step="1">
+      <div class="demo-step-emoji">&#9200;</div>
+      <div class="demo-step-h">How much time per week?</div>
+      <div class="demo-step-p">Be realistic &mdash; this shapes your plan.</div>
+      <div class="demo-opts">
+        <div class="demo-opt" data-val="5"><span class="demo-opt-em">&#127793;</span> Under 5 hours <span class="demo-opt-chk"></span></div>
+        <div class="demo-opt" data-val="15"><span class="demo-opt-em">&#127807;</span> 5-15 hours <span class="demo-opt-chk"></span></div>
+        <div class="demo-opt" data-val="30"><span class="demo-opt-em">&#127795;</span> 15-30 hours <span class="demo-opt-chk"></span></div>
+        <div class="demo-opt" data-val="40"><span class="demo-opt-em">&#128640;</span> Full-time ready <span class="demo-opt-chk"></span></div>
+      </div>
+      <button class="demo-next">Continue &rarr;</button>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="demo-step" data-step="2">
+      <div class="demo-step-emoji">&#127919;</div>
+      <div class="demo-step-h">What's your income goal?</div>
+      <div class="demo-step-p">Pick what feels right for now.</div>
+      <div class="demo-opts">
+        <div class="demo-opt" data-val="side"><span class="demo-opt-em">&#128176;</span> Side income ($500-$1k/mo) <span class="demo-opt-chk"></span></div>
+        <div class="demo-opt" data-val="serious"><span class="demo-opt-em">&#128200;</span> Serious income ($2k-$5k/mo) <span class="demo-opt-chk"></span></div>
+        <div class="demo-opt" data-val="full"><span class="demo-opt-em">&#128640;</span> Full replacement ($5k+/mo) <span class="demo-opt-chk"></span></div>
+      </div>
+      <button class="demo-next">See my results &rarr;</button>
+    </div>
+
+    <!-- Step 4: Results -->
+    <div class="demo-step" data-step="3">
+      <div class="demo-result-wrap">
+        <div class="demo-step-emoji">&#127881;</div>
+        <div class="demo-step-h">Your Opportunity Score</div>
+        <div class="demo-result-score-big" id="demoScoreNum">0</div>
+        <div class="demo-step-p" style="margin-bottom:12px;" id="demoScoreLabel">Calculating...</div>
+        <div class="demo-ideas-list" id="demoIdeas"></div>
+        <button class="demo-next ready" style="margin-top:20px;opacity:1;pointer-events:all;" onclick="document.getElementById('demoOverlay').classList.remove('open')">Close &amp; Get My Full Plan</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ VERSION COMPARE BAR ═══════════════ -->
+<div style="position:fixed;bottom:16px;right:16px;z-index:9999;display:flex;gap:6px;padding:8px 12px;background:rgba(15,23,42,.92);backdrop-filter:blur(12px);border-radius:12px;border:1px solid rgba(255,255,255,.1);box-shadow:0 8px 32px rgba(0,0,0,.3);font-family:Inter,sans-serif;font-size:.75rem;font-weight:600;align-items:center;">
+  <span style="color:rgba(255,255,255,.4);margin-right:4px;">Compare:</span>
+  <a href="index.html" style="padding:5px 10px;border-radius:8px;color:rgba(255,255,255,.5);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);transition:all .2s;">v1</a>
+  <a href="index-v2.html" style="padding:5px 10px;border-radius:8px;color:rgba(255,255,255,.5);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);transition:all .2s;">v2</a>
+  <a href="index-v3.html" style="padding:5px 10px;border-radius:8px;color:rgba(255,255,255,.5);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);transition:all .2s;">v3</a>
+  <a href="index-v4.html" style="padding:5px 10px;border-radius:8px;color:var(--green-400);background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);pointer-events:none;">v4 &#10004;</a>
+</div>
+
+<!-- ═══════════════ STRIPE.JS ═══════════════ -->
+<script src="https://js.stripe.com/v3/"></script>
+
+<!-- ═══════════════ JS ═══════════════ -->
+<script>
+/* ═════════════════════════════════════════
+   STRIPE CHECKOUT CONFIGURATION
+   ─────────────────────────────────────────
+   1. Go to https://dashboard.stripe.com
+   2. Create a Product → add a $9/month recurring price
+   3. Copy your Publishable Key + Price ID below
+   4. Set your success/cancel URLs
+═════════════════════════════════════════ */
+const STRIPE_CONFIG = {
+  publishableKey: 'pk_test_YOUR_PUBLISHABLE_KEY_HERE',   // Replace with your Stripe publishable key
+  premiumPriceId: 'price_YOUR_PRICE_ID_HERE',            // Replace with your $9/mo price ID
+  successUrl: window.location.origin + '/?payment=success',
+  cancelUrl:  window.location.origin + '/?payment=cancelled',
+};
+
+let stripeInstance = null;
+try {
+  if (STRIPE_CONFIG.publishableKey && !STRIPE_CONFIG.publishableKey.includes('YOUR_')) {
+    stripeInstance = Stripe(STRIPE_CONFIG.publishableKey);
+  }
+} catch (e) { console.warn('Stripe init skipped:', e.message); }
+
+function startCheckout(priceId) {
+  if (!stripeInstance) {
+    showToast('⚠️ Stripe not configured yet — add your API keys');
+    console.warn('Stripe not initialized. Set your publishableKey and premiumPriceId in STRIPE_CONFIG.');
+    return;
+  }
+  stripeInstance.redirectToCheckout({
+    lineItems: [{ price: priceId, quantity: 1 }],
+    mode: 'subscription',
+    successUrl: STRIPE_CONFIG.successUrl,
+    cancelUrl: STRIPE_CONFIG.cancelUrl,
+  }).then(function(result) {
+    if (result.error) {
+      showToast('❌ ' + result.error.message);
+    }
+  });
+}
+
+function handlePremiumClick(e) {
+  e.preventDefault();
+  burstConfetti(e.clientX, e.clientY);
+  setTimeout(() => startCheckout(STRIPE_CONFIG.premiumPriceId), 400);
+}
+
+// Handle ?payment= query params (success / cancelled)
+(function handlePaymentReturn() {
+  const params = new URLSearchParams(window.location.search);
+  const status = params.get('payment');
+  if (status === 'success') {
+    // Show success banner
+    const bar = document.createElement('div');
+    bar.className = 'payment-success-bar';
+    bar.innerHTML = '&#127881; Payment successful! Welcome to Earnr AI Premium <button class="close-bar" onclick="this.parentElement.remove()">&#10005;</button>';
+    document.body.prepend(bar);
+    setTimeout(() => showToast('&#128231; Check your email for your receipt'), 2500);
+    window.history.replaceState({}, '', window.location.pathname);
+  } else if (status === 'cancelled') {
+    setTimeout(() => showToast('Payment cancelled &mdash; no charge was made'), 800);
+    window.history.replaceState({}, '', window.location.pathname);
+  }
+})();
+
+/* ─────────────────────────────────────────
+   1. SCROLL PROGRESS BAR
+───────────────────────────────────────── */
+const scrollProg = document.getElementById('scroll-progress');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  scrollProg.style.width = (window.scrollY / h * 100) + '%';
+}, { passive: true });
+
+/* ─────────────────────────────────────────
+   2. CUSTOM CURSOR GLOW
+───────────────────────────────────────── */
+const cursorGlow = document.getElementById('cursor-glow');
+let cX = 0, cY = 0, rX = 0, rY = 0;
+document.addEventListener('mousemove', e => {
+  cX = e.clientX; cY = e.clientY;
+  if (!cursorGlow.classList.contains('show')) cursorGlow.classList.add('show');
+});
+(function renderCursor() {
+  rX += (cX - rX) * 0.15;
+  rY += (cY - rY) * 0.15;
+  cursorGlow.style.left = rX + 'px';
+  cursorGlow.style.top = rY + 'px';
+  requestAnimationFrame(renderCursor);
+})();
+document.addEventListener('mouseover', e => {
+  const t = e.target.closest('a, button, .skill-pill, .time-opt, .demo-opt, .q-option');
+  cursorGlow.classList.toggle('hovering', !!t);
+});
+
+/* ─────────────────────────────────────────
+   3. NAV SCROLL EFFECT
+───────────────────────────────────────── */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 20);
+}, { passive: true });
+
+/* ─────────────────────────────────────────
+   4. SCROLL REVEAL
+───────────────────────────────────────── */
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.fade-up').forEach(el => revealObserver.observe(el));
+
+/* ─────────────────────────────────────────
+   5. FAQ ACCORDION
+───────────────────────────────────────── */
+function toggleFaq(el) {
+  const item = el.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+/* ─────────────────────────────────────────
+   6. HERO CANVAS PARTICLES
+───────────────────────────────────────── */
+const canvas = document.getElementById('hero-canvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+function resizeCanvas() {
+  const hero = document.querySelector('.hero');
+  canvas.width = hero.offsetWidth;
+  canvas.height = hero.offsetHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+for (let i = 0; i < 80; i++) {
+  particles.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    vx: (Math.random() - .5) * .4,
+    vy: (Math.random() - .5) * .4,
+    r: Math.random() * 2.5 + 1.2
+  });
+}
+function drawParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  for (let i = 0; i < particles.length; i++) {
+    const p = particles[i];
+    p.x += p.vx; p.y += p.vy;
+    if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+    if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(34,197,94,.28)';
+    ctx.fill();
+    for (let j = i + 1; j < particles.length; j++) {
+      const q = particles[j];
+      const d = Math.hypot(p.x - q.x, p.y - q.y);
+      if (d < 160) {
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+        ctx.lineTo(q.x, q.y);
+        ctx.strokeStyle = `rgba(34,197,94,${.14 * (1 - d / 160)})`;
+        ctx.lineWidth = .7;
+        ctx.stroke();
+      }
+    }
+  }
+  requestAnimationFrame(drawParticles);
+}
+drawParticles();
+
+/* Dot-pattern highlight follows mouse in hero */
+const heroDotHL = document.getElementById('heroDotHL');
+const heroEl = document.querySelector('.hero');
+heroEl.addEventListener('mousemove', e => {
+  const rect = heroEl.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+  heroDotHL.style.webkitMaskImage = `radial-gradient(220px circle at ${x}px ${y}px, black 0%, transparent 100%)`;
+  heroDotHL.style.maskImage = `radial-gradient(220px circle at ${x}px ${y}px, black 0%, transparent 100%)`;
+});
+
+/* ─────────────────────────────────────────
+   7. TYPEWRITER
+───────────────────────────────────────── */
+const twTarget = document.getElementById('tw-target');
+const twPhrases = ['with AI in 60 seconds', 'using your real skills', 'starting from today', 'without the guesswork'];
+let twPi = 0, twCi = 0, twDel = false;
+function twTick() {
+  const phrase = twPhrases[twPi];
+  if (!twDel) {
+    twCi++;
+    twTarget.textContent = phrase.slice(0, twCi);
+    if (twCi === phrase.length) { setTimeout(() => { twDel = true; twTick(); }, 2200); return; }
+    setTimeout(twTick, 55 + Math.random() * 40);
+  } else {
+    twCi--;
+    twTarget.textContent = phrase.slice(0, twCi);
+    if (twCi === 0) { twDel = false; twPi = (twPi + 1) % twPhrases.length; setTimeout(twTick, 400); return; }
+    setTimeout(twTick, 30);
+  }
+}
+twTick();
+
+/* ─────────────────────────────────────────
+   8. SCORE RING ANIMATION
+───────────────────────────────────────── */
+const scoreRing = document.getElementById('scoreRing');
+const scoreNum = document.getElementById('scoreNum');
+if (scoreRing && scoreNum) {
+  const circumference = 2 * Math.PI * 54;
+  const targetScore = 78;
+  const targetOffset = circumference - (targetScore / 100) * circumference;
+  const animObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        scoreRing.style.transition = 'stroke-dashoffset 1.5s cubic-bezier(.34,1.56,.64,1)';
+        scoreRing.style.strokeDashoffset = targetOffset;
+        let current = 0; const duration = 1400; const start = performance.now();
+        function updateNum(ts) {
+          const p = Math.min((ts - start) / duration, 1);
+          scoreNum.textContent = Math.round((1 - Math.pow(1 - p, 3)) * targetScore);
+          if (p < 1) requestAnimationFrame(updateNum);
+        }
+        requestAnimationFrame(updateNum);
+        animObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  const ss = scoreRing.closest('.screen-score');
+  if (ss) animObserver.observe(ss);
+}
+
+/* ─────────────────────────────────────────
+   9. HERO PHONE FLOAT
+───────────────────────────────────────── */
+const phoneWrap = document.querySelector('.phone-wrap');
+if (phoneWrap) {
+  let tick = 0;
+  function floatPhones() {
+    tick += 0.008;
+    const main = phoneWrap.querySelector('.phone:not(.phone-secondary)');
+    const sec = phoneWrap.querySelector('.phone-secondary');
+    if (main) main.style.transform = `translateY(${Math.sin(tick) * 8}px)`;
+    if (sec) sec.style.transform = `scale(.88) rotate(4deg) translateY(${Math.sin(tick + 1) * 10}px)`;
+    requestAnimationFrame(floatPhones);
+  }
+  floatPhones();
+}
+
+/* ─────────────────────────────────────────
+   10. MOBILE NAV
+───────────────────────────────────────── */
+const mobileBtn = document.getElementById('mobileMenuBtn');
+let mobileOpen = false;
+if (mobileBtn) {
+  mobileBtn.addEventListener('click', () => {
+    mobileOpen = !mobileOpen;
+    const spans = mobileBtn.querySelectorAll('span');
+    if (mobileOpen) {
+      spans[0].style.transform = 'rotate(45deg) translate(4px, 4px)';
+      spans[1].style.opacity = '0';
+      spans[2].style.transform = 'rotate(-45deg) translate(4px, -4px)';
+    } else spans.forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
+  });
+}
+
+/* ─────────────────────────────────────────
+   11. PREVIEW PHONE ENTRANCE
+───────────────────────────────────────── */
+const previewPhones = document.querySelectorAll('.preview-phone');
+const previewObs = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => { e.target.style.opacity = '1'; }, i * 120);
+      previewObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.2 });
+previewPhones.forEach(p => { p.style.opacity = '0'; p.style.transition = 'opacity .6s ease'; previewObs.observe(p); });
+
+/* ─────────────────────────────────────────
+   12. 3D CARD TILT
+───────────────────────────────────────── */
+document.querySelectorAll('.tilt-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - .5;
+    const y = (e.clientY - rect.top) / rect.height - .5;
+    card.style.transform = `perspective(600px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg) scale3d(1.02,1.02,1.02)`;
+    const shine = card.querySelector('.tilt-shine');
+    if (shine) shine.style.background = `radial-gradient(circle at ${(x+.5)*100}% ${(y+.5)*100}%, rgba(255,255,255,.12) 0%, transparent 60%)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = '';
+    const shine = card.querySelector('.tilt-shine');
+    if (shine) shine.style.background = '';
+  });
+});
+
+/* ─────────────────────────────────────────
+   13. MAGNETIC BUTTONS
+───────────────────────────────────────── */
+document.querySelectorAll('[data-magnetic]').forEach(wrap => {
+  const btn = wrap.children[0];
+  wrap.addEventListener('mousemove', e => {
+    const rect = wrap.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    btn.style.transform = `translate(${x * .25}px, ${y * .25}px)`;
+  });
+  wrap.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+});
+
+/* ─────────────────────────────────────────
+   14. CONFETTI BURST
+───────────────────────────────────────── */
+function burstConfetti(x, y) {
+  const colors = ['#22c55e','#16a34a','#4ade80','#86efac','#f59e0b','#6366f1','#ec4899'];
+  for (let i = 0; i < 35; i++) {
+    const el = document.createElement('div');
+    el.className = 'cfp';
+    el.style.left = (x + (Math.random() - .5) * 60) + 'px';
+    el.style.top = (y - 20) + 'px';
+    el.style.width = (Math.random() * 8 + 4) + 'px';
+    el.style.height = (Math.random() * 6 + 3) + 'px';
+    el.style.background = colors[Math.floor(Math.random() * colors.length)];
+    el.style.animationDuration = (Math.random() * 1.2 + .8) + 's';
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 2200);
+  }
+}
+document.querySelectorAll('.cta-confetti').forEach(btn => {
+  btn.addEventListener('click', e => {
+    e.preventDefault();
+    burstConfetti(e.clientX, e.clientY);
+    showToast('&#127881; Opening your plan...');
+    setTimeout(() => openDemo(), 600);
+  });
+});
+
+/* ─────────────────────────────────────────
+   15. TOAST NOTIFICATIONS
+───────────────────────────────────────── */
+const toastWrap = document.getElementById('toastWrap');
+function showToast(html) {
+  const el = document.createElement('div');
+  el.className = 'toast-msg';
+  el.innerHTML = html;
+  toastWrap.appendChild(el);
+  setTimeout(() => { el.classList.add('out'); setTimeout(() => el.remove(), 350); }, 3000);
+}
+
+// Floating social proof toasts
+const proofMsgs = [
+  '&#129299; Sara from NYC just got her Money Map',
+  '&#128200; 12 new plans generated in the last hour',
+  '&#11088; Marcus scored 89 on his Opportunity Score',
+  '&#128640; 3,200+ plans created this week'
+];
+let proofI = 0;
+function scheduleProof() {
+  setTimeout(() => {
+    showToast(proofMsgs[proofI % proofMsgs.length]);
+    proofI++;
+    scheduleProof();
+  }, 12000 + Math.random() * 8000);
+}
+scheduleProof();
+
+/* ─────────────────────────────────────────
+   16. INTERACTIVE QUIZ
+───────────────────────────────────────── */
+const ideaMap = {
+  writing:   [{n:'Freelance Copywriting', e:'$25-$75/hr', i:'&#9997;&#65039;'},{n:'Blog Ghostwriting', e:'$500-$2k/mo', i:'&#128221;'},{n:'Email Marketing', e:'$30-$60/hr', i:'&#128231;'}],
+  design:    [{n:'Brand Design', e:'$40-$100/hr', i:'&#127912;'},{n:'Canva Templates', e:'Passive', i:'&#128444;&#65039;'},{n:'UI Freelancing', e:'$50-$120/hr', i:'&#128187;'}],
+  coding:    [{n:'Web Dev Freelancing', e:'$50-$150/hr', i:'&#128187;'},{n:'SaaS Side Project', e:'$1k-$10k/mo', i:'&#128640;'},{n:'Code Tutoring', e:'$30-$80/hr', i:'&#127891;'}],
+  social:    [{n:'Social Media Mgmt', e:'$500-$2k/mo', i:'&#128241;'},{n:'UGC Creator', e:'$200-$500/video', i:'&#127909;'},{n:'Affiliate Marketing', e:'Passive', i:'&#128176;'}],
+  video:     [{n:'Video Editing', e:'$30-$80/hr', i:'&#127909;'},{n:'YouTube Channel', e:'$500-$5k/mo', i:'&#128250;'},{n:'Stock Footage', e:'Passive', i:'&#128247;'}],
+  teaching:  [{n:'Online Tutoring', e:'$20-$60/hr', i:'&#127891;'},{n:'Course Creation', e:'$1k-$10k/mo', i:'&#128218;'},{n:'Coaching', e:'$50-$200/hr', i:'&#128161;'}],
+  marketing: [{n:'Marketing Consulting', e:'$60-$150/hr', i:'&#128227;'},{n:'SEO Freelancing', e:'$40-$100/hr', i:'&#128202;'},{n:'Ad Management', e:'$1k-$5k/mo', i:'&#128200;'}],
+  music:     [{n:'Music Production', e:'$50-$200/beat', i:'&#127925;'},{n:'Podcast Editing', e:'$20-$50/hr', i:'&#127897;&#65039;'},{n:'Stock Music', e:'Passive', i:'&#127911;'}],
+  photo:     [{n:'Stock Photography', e:'Passive', i:'&#128247;'},{n:'Product Photography', e:'$50-$200/hr', i:'&#128248;'},{n:'Photo Editing', e:'$25-$60/hr', i:'&#127912;'}],
+  sales:     [{n:'Sales Consulting', e:'$60-$150/hr', i:'&#128176;'},{n:'Lead Generation', e:'$1k-$5k/mo', i:'&#128202;'},{n:'Affiliate Marketing', e:'Passive', i:'&#128200;'}],
+  data:      [{n:'Data Analysis', e:'$40-$100/hr', i:'&#128202;'},{n:'Spreadsheet Automation', e:'$30-$80/hr', i:'&#128187;'},{n:'BI Dashboards', e:'$50-$120/hr', i:'&#128200;'}],
+  language:  [{n:'Translation Services', e:'$25-$60/hr', i:'&#127760;'},{n:'Language Tutoring', e:'$20-$50/hr', i:'&#127891;'},{n:'Localization', e:'$30-$70/hr', i:'&#128221;'}]
+};
+
+const quizState = { skills: [], time: 0 };
+const qRing = document.getElementById('qRing');
+const qScore = document.getElementById('qScore');
+const qTitle = document.getElementById('qTitle');
+const qDesc = document.getElementById('qDesc');
+const qIdeas = document.getElementById('qIdeas');
+
+document.querySelectorAll('.skill-pill').forEach(pill => {
+  pill.addEventListener('click', () => {
+    pill.classList.toggle('selected');
+    const sk = pill.dataset.skill;
+    if (quizState.skills.includes(sk)) quizState.skills = quizState.skills.filter(s => s !== sk);
+    else quizState.skills.push(sk);
+    updateQuiz();
+  });
+});
+document.querySelectorAll('.time-opt').forEach(opt => {
+  opt.addEventListener('click', () => {
+    document.querySelectorAll('.time-opt').forEach(o => o.classList.remove('selected'));
+    opt.classList.add('selected');
+    quizState.time = parseInt(opt.dataset.time);
+    updateQuiz();
+  });
+});
+
+function updateQuiz() {
+  const sk = quizState.skills.length;
+  const tm = quizState.time;
+  let score = 0;
+  if (sk > 0) score += Math.min(sk * 14, 55);
+  if (tm > 0) score += Math.min(tm * 1.2, 45);
+  score = Math.min(Math.round(score), 99);
+
+  const circ = 2 * Math.PI * 70;
+  qRing.style.strokeDashoffset = circ - (score / 100) * circ;
+  qScore.textContent = score;
+  qScore.classList.toggle('lit', score > 0);
+
+  if (score === 0) {
+    qTitle.textContent = 'Your Opportunity Score';
+    qDesc.textContent = 'Select skills and time to see your personalized score.';
+    qIdeas.innerHTML = '<div class="quiz-empty">Your top income ideas will appear here</div>';
+  } else {
+    const level = score >= 70 ? 'High' : score >= 40 ? 'Moderate' : 'Growing';
+    qTitle.textContent = level + ' Opportunity';
+    qDesc.textContent = score >= 70 ? 'Excellent match! You have strong earning potential in several areas.' : score >= 40 ? 'Good foundation. A few more skills or hours would boost your score.' : 'You\'re on your way. Keep building and your options will grow.';
+
+    const ideas = [];
+    quizState.skills.forEach(s => { if (ideaMap[s]) ideas.push(...ideaMap[s]); });
+    const top3 = ideas.slice(0, 3);
+    qIdeas.innerHTML = '';
+    top3.forEach((idea, i) => {
+      const d = document.createElement('div');
+      d.className = 'qi';
+      d.innerHTML = `<div class="qi-icon">${idea.i}</div><div class="qi-name">${idea.n}</div><div class="qi-earn">${idea.e}</div>`;
+      qIdeas.appendChild(d);
+      setTimeout(() => d.classList.add('show'), 80 * (i + 1));
+    });
+  }
+}
+
+/* ─────────────────────────────────────────
+   17. DEMO MODAL
+───────────────────────────────────────── */
+const demoOverlay = document.getElementById('demoOverlay');
+const demoClose = document.getElementById('demoClose');
+let demoStep = 0;
+const demoAnswers = {};
+
+function openDemo() {
+  demoStep = 0;
+  demoAnswers.skill = null;
+  demoAnswers.time = null;
+  demoAnswers.goal = null;
+  renderDemoStep();
+  demoOverlay.classList.add('open');
+}
+
+function renderDemoStep() {
+  document.querySelectorAll('.demo-step').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.demo-step')[demoStep].classList.add('active');
+  const dots = document.querySelectorAll('.demo-prog-dot');
+  dots.forEach((d, i) => { d.className = 'demo-prog-dot'; if (i < demoStep) d.classList.add('done'); if (i === demoStep) d.classList.add('active'); });
+  // Reset selections in current step
+  document.querySelectorAll('.demo-step.active .demo-opt').forEach(o => o.classList.remove('picked'));
+  document.querySelectorAll('.demo-step.active .demo-next').forEach(b => { b.classList.remove('ready'); });
+}
+
+document.addEventListener('click', e => {
+  const opt = e.target.closest('.demo-opt');
+  if (!opt) return;
+  const step = opt.closest('.demo-step');
+  if (!step) return;
+  step.querySelectorAll('.demo-opt').forEach(o => o.classList.remove('picked'));
+  opt.classList.add('picked');
+  step.querySelector('.demo-next').classList.add('ready');
+  const val = opt.dataset.val;
+  const si = parseInt(step.dataset.step);
+  if (si === 0) demoAnswers.skill = val;
+  if (si === 1) demoAnswers.time = val;
+  if (si === 2) demoAnswers.goal = val;
+});
+
+document.addEventListener('click', e => {
+  const btn = e.target.closest('.demo-next');
+  if (!btn || !btn.classList.contains('ready')) return;
+  demoStep++;
+  if (demoStep <= 3) {
+    renderDemoStep();
+    if (demoStep === 3) showDemoResult();
+  }
+});
+
+demoClose.addEventListener('click', () => demoOverlay.classList.remove('open'));
+demoOverlay.addEventListener('click', e => { if (e.target === demoOverlay) demoOverlay.classList.remove('open'); });
+
+// Nav CTA opens demo
+document.getElementById('navCta').addEventListener('click', e => { e.preventDefault(); openDemo(); });
+
+function showDemoResult() {
+  let score = 55 + Math.floor(Math.random() * 30);
+  if (demoAnswers.time >= 15) score += 8;
+  if (demoAnswers.goal === 'full') score += 5;
+  score = Math.min(score, 96);
+
+  const el = document.getElementById('demoScoreNum');
+  let cur = 0;
+  const start = performance.now();
+  function anim(ts) {
+    const p = Math.min((ts - start) / 1200, 1);
+    cur = Math.round((1 - Math.pow(1 - p, 3)) * score);
+    el.textContent = cur;
+    if (p < 1) requestAnimationFrame(anim);
+  }
+  requestAnimationFrame(anim);
+
+  document.getElementById('demoScoreLabel').textContent = score >= 70 ? 'Strong earning potential detected!' : 'Good starting foundation!';
+
+  const sk = demoAnswers.skill || 'writing';
+  const ideas = ideaMap[sk] || ideaMap.writing;
+  const wrap = document.getElementById('demoIdeas');
+  wrap.innerHTML = '';
+  ideas.forEach((idea, i) => {
+    const row = document.createElement('div');
+    row.className = 'demo-idea-row';
+    row.innerHTML = `<div class="demo-idea-num">${i+1}</div><div class="demo-idea-nm">${idea.n}</div><div class="demo-idea-earn">${idea.e}</div>`;
+    wrap.appendChild(row);
+  });
+}
+
+/* ─────────────────────────────────────────
+   18. INITIAL TOAST
+───────────────────────────────────────── */
+setTimeout(() => showToast('&#128075; Welcome! Scroll down to try the live quiz'), 2500);
+
+/* ─────────────────────────────────────────
+   19. ANIMATED LIST — Staggered scroll reveal
+───────────────────────────────────────── */
+const animListObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('anim-visible');
+      animListObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15, rootMargin: '0px 0px -30px 0px' });
+
+document.querySelectorAll('.anim-list-item').forEach(el => {
+  animListObserver.observe(el);
+});
+
+/* Keyboard navigation for animated list items in testimonials */
+let animSelectedIdx = -1;
+const animListItems = document.querySelectorAll('.testimonials-grid .anim-list-item, .audience-grid .anim-list-item');
+document.addEventListener('keydown', e => {
+  if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp' && e.key !== 'Enter') return;
+  // Only activate if one of these sections is in viewport
+  const proofSection = document.querySelector('.proof-section');
+  if (!proofSection) return;
+  const rect = proofSection.getBoundingClientRect();
+  if (rect.top > window.innerHeight || rect.bottom < 0) return;
+
+  e.preventDefault();
+  if (e.key === 'ArrowDown') {
+    animSelectedIdx = Math.min(animSelectedIdx + 1, animListItems.length - 1);
+  } else if (e.key === 'ArrowUp') {
+    animSelectedIdx = Math.max(animSelectedIdx - 1, 0);
+  }
+  animListItems.forEach((el, i) => {
+    el.classList.toggle('anim-selected', i === animSelectedIdx);
+  });
+  if (animListItems[animSelectedIdx]) {
+    animListItems[animSelectedIdx].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+});
+// Clear selection on click elsewhere
+document.addEventListener('click', e => {
+  if (!e.target.closest('.anim-list-item')) {
+    animSelectedIdx = -1;
+    animListItems.forEach(el => el.classList.remove('anim-selected'));
+  }
+});
+
+/* ─────────────────────────────────────────
+   20. FLUID GLASS LENS — Mouse-follow refraction
+───────────────────────────────────────── */
+const fluidGlass = document.getElementById('fluid-glass');
+const heroSection = document.querySelector('.hero');
+let glassX = 0, glassY = 0, glassTargetX = 0, glassTargetY = 0;
+let glassActive = false;
+
+heroSection.addEventListener('mouseenter', () => { glassActive = true; });
+heroSection.addEventListener('mouseleave', () => {
+  glassActive = false;
+  fluidGlass.style.opacity = '0';
+  fluidGlass.style.transform = 'translate(-50%, -50%) scale(0.8)';
+});
+
+heroSection.addEventListener('mousemove', e => {
+  const rect = heroSection.getBoundingClientRect();
+  glassTargetX = e.clientX - rect.left;
+  glassTargetY = e.clientY - rect.top;
+});
+
+(function renderGlass() {
+  if (glassActive) {
+    glassX += (glassTargetX - glassX) * 0.1;
+    glassY += (glassTargetY - glassY) * 0.1;
+    fluidGlass.style.left = glassX + 'px';
+    fluidGlass.style.top = glassY + 'px';
+  }
+  requestAnimationFrame(renderGlass);
+})();
+
+/* ─────────────────────────────────────────
+   21. AMBIENT ORBS — Reveal on scroll
+───────────────────────────────────────── */
+const orbObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    } else {
+      entry.target.classList.remove('visible');
+    }
+  });
+}, { threshold: 0.05 });
+document.querySelectorAll('.ambient-orb').forEach(orb => orbObserver.observe(orb));
+
+/* ─────────────────────────────────────────
+   22. STRIPE CHECKOUT — Wire buttons
+───────────────────────────────────────── */
+// Premium CTA button in pricing section
+document.querySelectorAll('.stripe-premium-btn').forEach(btn => {
+  btn.addEventListener('click', handlePremiumClick);
+});
+
+// Quiz "Get My Full Plan" → opens demo (free flow), not Stripe
+// Demo modal "Close & Get My Full Plan" → already handled
+
+// Add Stripe badge below premium pricing card for trust
+const premiumCard = document.querySelector('.pricing-card.premium .pricing-note');
+if (premiumCard) {
+  premiumCard.innerHTML = 'Cancel anytime &middot; Powered by <svg style="display:inline;vertical-align:middle;margin-left:3px;" width="40" height="16" viewBox="0 0 40 16"><text x="0" y="12" font-family="Inter,sans-serif" font-weight="700" font-size="11" fill="rgba(255,255,255,.45)">Stripe</text></svg>';
+}
+</script>
+</body>
+</html>
