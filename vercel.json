@@ -1,6 +1,6 @@
 {
   "rewrites": [
-    { "source": "/", "destination": "/index-v4.html" }
+    { "source": "/", "destination": "/coming-soon.html" }
   ],
   "headers": [
     {
