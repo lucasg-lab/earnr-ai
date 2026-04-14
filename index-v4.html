@@ -3404,8 +3404,8 @@ document.querySelectorAll('.cta-confetti').forEach(btn => {
   btn.addEventListener('click', e => {
     e.preventDefault();
     burstConfetti(e.clientX, e.clientY);
-    showToast('&#127881; Opening your plan...');
-    setTimeout(() => openDemo(), 600);
+    showToast('&#127881; Taking you to checkout...');
+    setTimeout(() => startCheckout(STRIPE_CONFIG.premiumPriceId), 600);
   });
 });
 
