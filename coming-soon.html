@@ -10,56 +10,28 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body {
-      height: 100%;
-      width: 100%;
-      overflow: hidden;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: #000;
-      color: #fff;
+      background-color: #000000;
+      color: #ffffff;
+      min-height: 100vh;
+      min-height: 100dvh;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      position: relative;
     }
 
-    /* ── Dot grid background ── */
-    .dots {
-      position: fixed;
-      inset: 0;
-      background-image: radial-gradient(circle, rgba(255,255,255,.04) 1px, transparent 1px);
-      background-size: 24px 24px;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    /* ── Green glow behind text ── */
-    .glow {
-      position: fixed;
-      width: 500px;
-      height: 500px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(34,197,94,.1) 0%, rgba(34,197,94,.03) 40%, transparent 70%);
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-      z-index: 2;
-      animation: pulse 4s ease-in-out infinite;
-    }
-
-    /* ── Logo in top-left corner ── */
+    /* ── Logo top-left ── */
     .logo {
-      position: fixed;
+      position: absolute;
       top: 28px;
       left: 32px;
       display: flex;
       align-items: center;
       gap: 10px;
-      z-index: 10;
     }
     .logo-icon {
       width: 36px;
@@ -69,61 +41,44 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-shrink: 0;
-      box-shadow: 0 0 20px rgba(34,197,94,.3);
+      box-shadow: 0 0 20px rgba(34,197,94,.25);
     }
     .logo-text {
       font-size: 1.2rem;
       font-weight: 800;
       letter-spacing: -.025em;
-      color: #fff;
       opacity: .9;
     }
 
-    /* ── Center content ── */
-    .center {
-      text-align: center;
-      position: relative;
-      z-index: 5;
-      padding: 0 24px;
-    }
-    .coming {
+    /* ── Centered text ── */
+    h1 {
       font-size: clamp(2.5rem, 8vw, 6rem);
       font-weight: 900;
       letter-spacing: -.04em;
       line-height: 1;
       margin-bottom: 16px;
-      background: linear-gradient(180deg, #fff 0%, rgba(255,255,255,.55) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: fadeUp .8s ease both;
+      color: #ffffff;
+      text-align: center;
+      animation: fadeUp .8s ease forwards;
+      opacity: 0;
     }
-    .sub {
+    p {
       font-size: clamp(.9rem, 2vw, 1.15rem);
       font-weight: 400;
       color: rgba(255,255,255,.35);
-      letter-spacing: .01em;
-      animation: fadeUp .8s ease .2s both;
+      text-align: center;
+      animation: fadeUp .8s ease .2s forwards;
+      opacity: 0;
     }
 
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
+      from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: .5; transform: translate(-50%, -50%) scale(1); }
-      50%      { opacity: 1;  transform: translate(-50%, -50%) scale(1.2); }
     }
   </style>
 </head>
 <body>
 
-  <!-- Background layers -->
-  <div class="dots"></div>
-  <div class="glow"></div>
-
-  <!-- Logo -->
   <div class="logo">
     <div class="logo-icon">
       <svg width="20" height="20" viewBox="0 0 18 18" fill="none">
@@ -133,11 +88,8 @@
     <span class="logo-text">Earnr AI</span>
   </div>
 
-  <!-- Center text -->
-  <div class="center">
-    <h1 class="coming">Coming Soon</h1>
-    <p class="sub">Something smart is on the way.</p>
-  </div>
+  <h1>Coming Soon</h1>
+  <p>Something smart is on the way.</p>
 
 </body>
 </html>
